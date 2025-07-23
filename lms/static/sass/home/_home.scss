@@ -21,10 +21,14 @@ section.home {
             .btn {
                 line-height: 20px;
                 padding: 9px 17px;
-                font-size: 14px;
-                border-radius: 6px;
-                font-weight: 500;
+                font-size: 16px;
+                color: $primary-d;
+                font-family: $font-family-title;
+                border-radius: 4px;
+                font-weight: 700;
                 display: block;
+                background-color: $btn-color-d;
+                border-color: $btn-color-d;
             }
         }
     }

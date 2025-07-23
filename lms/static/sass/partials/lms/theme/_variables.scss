@@ -1,4 +1,4 @@
-$primary: #15376D;
+$primary: #00908A;
 $primary-light: #F2F7F8;
 
 // Theme fonts
@@ -16,11 +16,15 @@ $dark: #111827;
 $light-dark: #374151;
 $big-screen: 1200px;
 
+// Gradient colors for dashboard background
+$gradientRightColor: #CED8EB;
+$gradientLeftColor: #E4EFEF;
 
-
+$topGradientRightColor: #052626;
+$topGradientLeftColor: #207780;
 // Introducing dark-theme variables
 
-$primary-d: #AEC7F6;
+$primary-d: #FFFFFF;
 $primary-light-d: #292A2C;
 $light-drak-d: #374151;
 $text-color-d: #F8F8F8;
@@ -29,8 +33,9 @@ $border-color-d: #777792;
 $light-overlay-d: #36383B;
 $danger-d: #FFA07A;
 $success-d: #54CF5E;
-$btn-color-d: #112F6B;
+$btn-color-d: #00908A;
 $body-bg-d:#0D0D0E;
 
 $warning-400: #ffe340;
 $page-color-transition: transparent .2s ease, color .2s ease;
+

@@ -6365,7 +6365,7 @@ header.global-header {
   header.global-header .hamburger-menu {
     height: 12px;
     width: 20px;
-    left: 150px;
+    left: 15px;
     top: 18px; }
     /* line 126, /openedx/themes/medical-tribune-indigo/lms/static/sass/extra/_header.scss */
     header.global-header .hamburger-menu .line {
@@ -6998,7 +6998,7 @@ body.indigo-dark-theme {
 /* line 10, /openedx/themes/medical-tribune-indigo/lms/static/sass/courseware/_discover.scss */
 .course-heading-area {
   margin: 0 0 20px;
-  font-size: 14px;
+  font-size: 50px;
   color: #515661; }
   @media (min-width: 768px) {
     /* line 10, /openedx/themes/medical-tribune-indigo/lms/static/sass/courseware/_discover.scss */
@@ -7009,7 +7009,7 @@ body.indigo-dark-theme {
   /* line 19, /openedx/themes/medical-tribune-indigo/lms/static/sass/courseware/_discover.scss */
   .course-heading-area h2 {
     color: #111827;
-    font-size: 20px;
+    font-size: 50px;
     font-weight: 700;
     line-height: 30px;
     margin: 0 0 8px; }
