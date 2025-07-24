@@ -18,21 +18,28 @@ from openedx.core.djangolib.markup import HTML, Text
       <header>
         <div class="outer-wrapper">
           <div class="main_overlay top-background-gradient">
+            <div class="triangle-white-polygon"></div>
             <div class="top-text-container">
               <h1 class="top-background-title">Witaj w Akademii Lekarza Online</h1>
               <p class="top-background-text">Etiam libero orci, ultricies eget nisi quis, gravida molestie mi.
                 Ut non purus tortor. Donec at sem ut erat sagittis sagittis. Suspendisse metus leo, congue ac metus id, fringilla posuere</p>
               <div class="top-buttons-container">
-                <p class="top-button">Button 1</p>
-                <p classe="top-button">Button 2</p>
+                  <a class="top-button" href="/help">Zobacz nasze kursy</a>
+                  <a class="top-button" href="/help">Uzyskaj pomoc</a>
               </div>
             </div>
             <div class="top-image-container">
-              <img class="top-image" src="${static.url('images/top-photo.png')}" width="300" />
+              <img class="top-image-background" src="${static.url('images/logo-background.png')}" width="477" />
+              <img class="top-image" src="${static.url('images/top-photo.png')}" width="371" />
+              <div class="white-circle">
+                <img class="play-button" src="${static.url('images/video-play-button.png')}" width="62" />
+              </div>
             </div>
           </div>
           <div class="top-white-container">
-
+            <div class="top-color-triangle"></div>
+            <div class="top-white-trapezoid"></div>
+            
           </div>
           <div class="title">
             <div class="heading-group">

@@ -103,8 +103,8 @@
                             height: 72px;
                         }
                         .course-title {
-                            color: #292C2E;
-                            font-size: 16px;
+                            color: #000000;
+                            font-size: 18px;
                             line-height: 22px;
                             height: auto;
                             padding: 0;
@@ -117,7 +117,7 @@
                             -webkit-box-orient: vertical;
                         }
                         .course-organization {
-                            color: #70787E;
+                            color: #414141;
                             font-size: 14px;
                             line-height: 20px;
                             height: auto;
@@ -140,16 +140,14 @@
                             margin: 0 0 30px;
                             z-index: -1;
                             color: #fff;
-                            &:hover {
-                                opacity: .8;
-                            }
+
                         }
                         .course-date {
-                            border-top: 1px solid #ECF0F4;
+//                             border-top: 1px solid #ECF0F4;
                             padding: 10px 20px;
                             margin: 0 -20px;
-                            color: #515661;
-                            font-size: 14px;
+                            color: #8D8E8F;
+                            font-size: 12px;
                             line-height: 20px;
                             svg {
                                 display: inline-block;
