@@ -129,7 +129,8 @@
     width: 100%;
     display: flex !important;
     justify-content: space-evenly;
-    height: 300px;
+    min-height: 300px;
+    flex-wrap: wrap;
 }
 
 .top-white-trapezoid {
@@ -151,7 +152,7 @@
 .info-container {
     display: block;
     z-index: 10;
-    padding: 20px;
+    max-width: 250px;
 }
 
 .info-title {

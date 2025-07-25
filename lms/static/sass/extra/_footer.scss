@@ -1,7 +1,6 @@
 // Include custom Footer
 .wrapper-footer {
     padding: 25px 0;
-    border-top: 15px solid #E5E7EB;
     @include media-breakpoint-up(md) {
         padding: 45px 0;
     }
@@ -30,6 +29,9 @@ footer.tutor-container {
             @include media-breakpoint-up(lg) {
                 float: left;
             }
+        }
+        .logo-big {
+            width: 200px;
         }
     }
     .logo-list {
