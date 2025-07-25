@@ -76,11 +76,13 @@
                     border: none;
                     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.06), 0px 1px 3px rgba(0, 0, 0, 0.10);
                     border-radius: 8px;
+                    border-bottom-left-radius: 0px;
+                    border-bottom-right-radius: 0px;
                     overflow: hidden;
                     background: #fff;
                     .course-image {
                         .cover-image {
-                            height: 162px;
+                            height: 168px;
                             &:before {
                                 display: none;
                             }
@@ -100,12 +102,12 @@
                         }
                         h2 {
                             font-family: $font-family-title;
-                            height: 72px;
                         }
                         .course-title {
                             color: #000000;
                             font-size: 18px;
                             line-height: 22px;
+                            font-weight: 700;
                             height: auto;
                             padding: 0;
                             margin: 0 0 5px;
@@ -117,9 +119,11 @@
                             -webkit-box-orient: vertical;
                         }
                         .course-organization {
-                            color: #414141;
-                            font-size: 14px;
+                            color: $dark-gray-text-color;
+                            font-size: 12px;
                             line-height: 20px;
+                            color: $dark-gray-text-color;
+                            font-weight: 400;
                             height: auto;
                             padding: 0;
                             margin: 0 0 15px;
@@ -133,27 +137,41 @@
                             border-radius: 4px;
                             background: $primary;
                             text-align: center;
+                            justify-content: center;
+                            align-items: center;
                             padding: 9px 17px;
                             font-size: 14px;
-                            font-weight: 500;
                             line-height: 20px;
                             margin: 0 0 30px;
-                            z-index: -1;
                             color: #fff;
-
+                            font-family: $font-family-main;
+                            font-weight: 700;
+                            width: 130px;
                         }
                         .course-date {
-//                             border-top: 1px solid #ECF0F4;
+                            border-bottom: 3px solid $course-listing-bottom-border;
                             padding: 10px 20px;
                             margin: 0 -20px;
-                            color: #8D8E8F;
+                            color: $course-listing-date-color;
                             font-size: 12px;
+                            font-weight: 400;
                             line-height: 20px;
+                            height: 60px;
                             svg {
                                 display: inline-block;
                                 margin: -4px 10px 0 0;
                                 vertical-align: middle;
                             }
+                        }
+                        .calendar-icon {
+                            margin-right: 7px;
+                            margin-top: -3.5px;
+                        }
+                        .course-upper-date {
+                            color: $dark-gray-text-color;
+                            font-family: $font-family-main;
+                            font-weight: 400;
+                            font-size: 12px;
                         }
                     }
                 }
