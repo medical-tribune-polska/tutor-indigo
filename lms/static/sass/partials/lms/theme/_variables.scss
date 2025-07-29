@@ -1,0 +1,57 @@
+$primary: #00908A;
+$primary-light: #F2F7F8;
+
+// Theme fonts && colors
+$font-family-title: 'Inter', sans-serif;
+$font-family-main: 'Inter', sans-serif;
+$dark-gray-text-color: #414141;
+$course-description-gray: #333333;
+$course-listing-date-color: #8D8E8F;
+$bottom-footer-border-color: #DBDBDB;
+$copyright-font-color: #777777;
+
+// Course listing
+$course-listing-bottom-border: #00958E;
+
+$serif: Crimson;
+$f-sans-serif: Crimson, 'Open Sans','Helvetica Neue', Helvetica, Arial, sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+// Initialize the Open edX Bootstrap theme
+@import 'edx-bootstrap/sass/open-edx/theme';
+
+
+// Introducing new variables
+
+$dark: #111827;
+$light-dark: #374151;
+$big-screen: 1200px;
+
+// Gradient colors for dashboard background
+$gradientRightColor: #CED8EB;
+$gradientLeftColor: #E4EFEF;
+$mainBackgroundGradient: linear-gradient(90deg, $gradientLeftColor 0%, white 40%, $gradientRightColor 100%);
+
+$topGradientRightColor: #052626;
+$topGradientLeftColor: #207780;
+
+// Dashboard top
+$topTriangleColor: #E5EAF4;
+$topInfoTitleColor: #00958E;
+$topInfoTextColor: #272727;
+
+// Introducing dark-theme variables
+
+$primary-d: #FFFFFF;
+$primary-light-d: #292A2C;
+$light-drak-d: #374151;
+$text-color-d: #F8F8F8;
+$text-color-primary: #DDDFE2;
+$border-color-d: #777792;
+$light-overlay-d: #36383B;
+$danger-d: #FFA07A;
+$success-d: #54CF5E;
+$btn-color-d: #00908A;
+$body-bg-d:#0D0D0E;
+
+$warning-400: #ffe340;
+$page-color-transition: transparent .2s ease, color .2s ease;

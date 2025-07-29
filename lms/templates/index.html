@@ -1,0 +1,120 @@
+<%page expression_filter="h"/>
+<%!
+import json
+from django.utils.translation import gettext as _
+from openedx.core.djangolib.js_utils import js_escaped_string, dump_js_escaped_json
+%>
+<%inherit file="main.html" />
+<%namespace name='static' file='static_content.html'/>
+<%!
+from django.utils.translation import gettext as _
+from django.urls import reverse
+
+from openedx.core.djangolib.markup import HTML, Text
+%>
+
+<main id="main" aria-label="Content" tabindex="-1" class="background-gradient">
+    <section class="home style-logout">
+      <header>
+        <div class="outer-wrapper">
+          <div class="main_overlay top-background-gradient">
+            <div class="triangle-white-polygon"></div>
+            <div class="top-text-container">
+              <h1 class="top-background-title">Witaj w Akademii Lekarza Online</h1>
+              <p class="top-background-text">Etiam libero orci, ultricies eget nisi quis, gravida molestie mi.
+                Ut non purus tortor. Donec at sem ut erat sagittis sagittis. Suspendisse metus leo, congue ac metus id, fringilla posuere</p>
+              <div class="top-buttons-container">
+                  <a class="top-button" href="#course_container">Zobacz nasze kursy</a>
+                  <a class="top-button" href="/help">Uzyskaj pomoc</a>
+              </div>
+            </div>
+            <div class="top-image-container">
+              <img class="top-image-background" src="${static.url('images/logo-background.png')}" width="477" />
+              <img class="top-image" src="${static.url('images/top-photo.png')}" width="371" />
+              <div class="white-circle">
+                <img class="play-button" src="${static.url('images/video-play-button.png')}" width="62" />
+              </div>
+            </div>
+          </div>
+          <div class="top-white-container">
+            <div class="top-color-triangle"></div>
+            <div class="top-white-trapezoid"></div>
+            <div class="info-container">
+              <div class="info-title-icon">
+                <img class="info-icon" src="${static.url('images/bulb.png')}" width="41" />
+                <p class="info-title">DOSTĘP DO EKSPERCKIEJ WIEDZY</p>
+              </div>
+              <p class="info-text">Możliwość poznania aktualnych europejskich rekomendacji dotyczących  szczepień, nowości w immunoprofilaktyce oraz informacji o najnowszych  generacjach szczepionek.</p>
+            </div>
+            <div class="info-container">
+              <div class="info-title-icon">
+                <img class="info-icon" src="${static.url('images/laptop.png')}" width="47" />
+                <p class="info-title">PERSONALIZACJA W EDUKACJI</p>
+              </div>
+              <p class="info-text">Ucz się w dostosowanym do twoich preferencji tempie. Wyznacz tygodniowe cele od szkolenie w trybie normalnym po intensywny trening 5 dni w tygodniu.</p>
+            </div>
+            <div class="info-container">
+              <div class="info-title-icon">
+                <img class="info-icon" src="${static.url('images/person.png')}" width="43" />
+                <p class="info-title">WYGODA I OSZCZĘDNOŚĆ CZASU</p>
+              </div>
+              <p class="info-text">Kursy odbywają się na naszej interaktywnej platformie online, co  oznacza, że możesz wziąć w nim udział z dowolnego miejsca w Polsce.</p>
+            </div>
+            <div class="info-container">
+              <div class="info-title-icon">
+                <img class="info-icon" src="${static.url('images/certificate.png')}" width="40" />
+                <p class="info-title">CERTYFIAKTY SKOŃCZENIA NAUKI</p>
+              </div>
+              <p class="info-text">Po każdym kursie otrzymasz certykikat ukończenia kursu uprawniający Cię do operacji pacjentów bez znieczulenia.</p>
+            </div>
+          </div>
+          <div class="title">
+            <div class="heading-group">
+              % if homepage_overlay_html:
+                ${homepage_overlay_html | n, decode.utf8}
+              % else:
+                <%include file="index_overlay.html" />
+              % endif
+            </div>
+          </div>
+          <div id="course_container" class="courses-container">
+            <div class="course-holder courses" role="region" aria-label="${_('List of Courses')}">
+                <ul class="courses-listing courses-list">
+                  %for course in courses:
+                  <li class="courses-listing-item">
+                    <%include file="course.html" args="course=course" />
+                  </li>
+                  %endfor
+                </ul>
+              </div>
+            </div>
+          </div>
+      </header>
+    </section>
+</main>
+
+% if show_homepage_promo_video:
+  <section id="video-modal" class="modal home-page-video-modal video-modal">
+    <div class="inner-wrapper">
+      <iframe title="YouTube Video" width="640" height="360" src="//www.youtube.com/embed/${homepage_promo_video_youtube_id}?showinfo=0" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </section>
+% endif
+
+<%block name="js_extra">
+   <script type="text/javascript">
+      $(window).load(function() {
+         if(getParameterByName('next')) {
+              $('#login').trigger("click");
+         }
+      })
+   </script>
+</%block>
+
+% if show_signup_immediately is not UNDEFINED:
+  ## NOTE: This won't work in production, because anonymous views are cached, so it will
+  ## show either with or without this extra js for 3 minutes at a time.
+<script type="text/javascript">
+  $(window).load(function() {$('#signup_action').trigger("click");});
+</script>
+% endif
