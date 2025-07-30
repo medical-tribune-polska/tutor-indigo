@@ -19,6 +19,7 @@ footer.tutor-container {
     }
     .footer-top {
         display: flex !important;
+        align-items: center;
         justify-content: space-between;
         border-bottom: 1px solid $bottom-footer-border-color;
         margin: 0 0 15px;

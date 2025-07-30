@@ -52,6 +52,8 @@ h1, h2, h3, h1 span, h2 span, h3 span, .nav-item {
 // It is necessary to specify `:not(.courseware) >` in order to not affect the style
 // of `#content.content-wrapper` inside the unit iframe in the MFE
 :not(.courseware) > #content.content-wrapper {
+    background-image: $mainBackgroundGradient;
+
   @include media-breakpoint-up(lg) {
     padding-top: $content-padding-top;
     padding-bottom: $content-padding-bottom;
@@ -237,8 +239,8 @@ nav.wrapper-preview-menu {
 }
 .container, .main-container, .find-courses {
   max-width: 1600px;
-  padding-left: 15px !important;
-  padding-right: 15px !important;
+  padding-left: 30px !important;
+  padding-right: 30px !important;
   margin: 0 auto;
 }
 .window-wrap {
@@ -262,22 +264,76 @@ nav.wrapper-preview-menu {
       }
     }
 }
+
+.main-about-container {
+    padding: 30px ;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 0px 20px 1px rgba(0,0,0,0.08);
+}
+
+.bottom-about-container {
+    border-radius: 8px;
+    background-color: $bottom-about-container-background-color;
+    margin-top: -10px;
+    display: flex !important;
+    flex-wrap: wrap;
+    padding: 30px;
+
+    .bottom-h2 {
+        color: $white-color !important;
+        font-size: 18px;
+        font-weight: 700;
+    }
+    .bottom-p {
+        color: $white-color !important;
+        font-size: 16px;
+        font-weight: 400;
+    }
+}
+
+.bottom-about-left-container {
+    width: 50%;
+}
+
+.padded-bottom-about-text-container {
+    padding-left: 40px;
+     border-left: 1px solid rgb(255, 255, 255);
+}
+
 .container {
   &.about{
-    padding: 30px 0;
+    padding: 40px 40px;
     font-size: 16px;
     line-height: 24px;
     color: #515661;
+    //margin-left: 30px;
     h1 {
       font-size: 24px;
       font-weight: 700;
       line-height: 34px;
-      margin: 0 0 12px;
+      margin: 0 0 40px;
       text-align: left;
-      color: $dark;
+      color: $black-color;
+    }
+    h2 {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 24px;
+      color: $black-color;
     }
     p {
       margin: 0 0 20px;
+      color: $course-description-gray;
+      font-weight: 400;
+    }
+    .small-ul {
+        margin-bottom: 20px;
+    }
+    .small-dotted {
+      margin-left: 30px;
+      font-size: 15px;
+
     }
     a {
       color: $primary;

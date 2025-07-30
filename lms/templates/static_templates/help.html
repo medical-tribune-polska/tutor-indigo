@@ -10,13 +10,73 @@
         <h1>
             <%block name="pageheader">${page_header or _("Help")}</%block>
         </h1>
-        <p>
-            <%block name="pagecontent">${page_content or _("This page left intentionally blank. Feel free to add your own content.")}</%block>
-        </p>
-        <!-- NEW IN INDIGO: add graphic image -->
-        <div class="graphic-img">
-            <img src="${static.url('images/help.svg')}" alt="Runs on Tutor" />
-            <img class="dark" src="${static.url('images/help-dark.svg')}" alt="Runs on Tutor" />
+        <div class="main-about-container">
+            <h2>
+                Czy kursy są płatne?
+            </h2>
+            <p>
+                Tak, szkolenia są płatne. Aby rozpocząć naukę musisz wykupić dostęp do kursu przez sklep Podyplomie.pl
+            </p>
+            <h2>
+                W jaki sposób dołączyć do kursu?
+            </h2>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc urna  tortor, fermentum et rhoncus eu, efficitur nec nulla. Maecenas nibh leo, accumsan ornare lacus eu, aliquam imperdiet dui. Sed sit amet mattis  urna. Maecenas et elementum massa, quis feugiat ex. Ut a suscipit  ligula, ut dapibus ante. Orci varius natoque penatibus et magnis dis  parturient montes, nascetur ridiculus mus. Ut sem ante, facilisis ut  mauris nec, efficitur porta turpis. Proin efficitur purus quis purus  lobortis bibendum. Aenean eu nisl consequat, sagittis odio ut, ornare  libero. Interdum et malesuada fames ac ante ipsum primis in faucibus.  Duis dapibus pharetra sapien, vitae rhoncus augue varius eu. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sit amet malesuada erat. Nullam dapibus ut orci non varius.            </p>
+            <h2>
+                Co otrzymasz kupując dostęp do kursu?
+            </h2>
+            <p>
+                <ul>
+                    <li>Transmisję ONLINE z kongresu - umożliwiamy udział w wydarzeniu na dowolnym urządzeniu, nasza platforma dostosowana jest do odtwarzania  wykładów na telefonach komórkowych oraz laptopach.</li>
+                    <li>Dyskusje na żywo z wykładowcami - po każdej zakończonej sesji prelegenci wezmą udział w sesji pytań i odpowiedzi.</li>
+                    <li>Certyfikat uczestnictwa z przyznanymi punktami edukacyjnymi - każda osoba uczestnicząca w wydarzeniu otrzyma poświadczenie udziału w wersji elektronicznej</li>
+                    <li>Specjalna Torba Szkoleniowa a w niej:</li>
+                </ul>
+                <ul class="small-ul">
+                        <li class="small-dotted">Zeszyt szkoleniowy z prezentacjami - materiały z wykładów zostaną  udostępnione uczestnikom przed wydarzeniem w formie papierowej i  elektronicznej.</li>
+                        <li class="small-dotted">Aktualne czasopismo z oferty Medical Tribune - wybrany magazyn lidera na krajowym rynku fachowej prasy medycznej.</li>
+                        <li class="small-dotted">Wydanie specjalne „Magazynu podyplomie.pl” - materiał edukacyjny  przygotowany specjalnie na potrzeby AKADEMII LEKARZA.</li>
+                </ul>
+            </p>
+            <h2>
+                Gdzie mogę rozpocząć kurs?
+            </h2>
+            <p>
+                Kursy i szkolenia możesz realizowąć w dowolnym miejscu z dostępem do Internetu na laptopie, smartfonie lub tablecie.
+            </p>
+
+            <h2>
+                Jakie wymagania techniczne muszę spełnić aby rozpocząć kurs?
+            </h2>
+            <p>
+                Do oglądania transmisji minimalne parametry to: pobieranie 2,5 Mbit/s i  3,5 Mbit/s dla jakości HD. Rekomendujemy korzystanie z najnowszych  wersji przeglądarek Chrome, Firefox, Safari oraz Microsoft Edge.            </p>
+            <h2>
+                Czy otrzymam certyfikat uczestnictwa i punkty edukacyjne?
+            </h2>
+            <p>
+                Certyfikat uczestnictwa z przyznanymi punktami edukacyjnymi - każda  osoba uczestnicząca w wydarzeniu otrzyma poświadczenie udziału w wersji  elektronicznej.
+            </p>
+        </div>
+
+        <div class="bottom-about-container">
+            <div class="bottom-about-left-container">
+                <h2 class="bottom-h2">Masz pytania?<br>
+                    Zadzwoń lub napisz do nas!</h2>
+                <p class="bottom-p">Biuro Obsługi Klienta<br>
+                    801 044 415<br>
+                    +48 (22) 444 24 44<br>
+                    kontakt@akademialekarza.online
+                </p>
+            </div>
+            <div class=padded-bottom-about-text-container">
+                <h2 class="bottom-h2">Chcesz zostać sponsorem lub patronem kursu?<br>
+                    Skontaktuj się z nami</h2>
+                <p class="bottom-p">Weronika Włostowska<br>
+                    Senior Key Account Manager<br>
+                    +48 501 076 131<br>
+                    w.wlostowska@medical-tribune.pl
+                </p>
+            </div>
         </div>
     </section>
 </main>
