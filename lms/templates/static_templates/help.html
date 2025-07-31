@@ -10,7 +10,7 @@
         <h1>
             <%block name="pageheader">${page_header or _("Help")}</%block>
         </h1>
-        <div class="main-about-container">
+        <div class="main-help-about-container">
             <h2>
                 Czy kursy są płatne?
             </h2>
@@ -58,8 +58,8 @@
             </p>
         </div>
 
-        <div class="bottom-about-container">
-            <div class="bottom-about-left-container">
+        <div class="bottom-help-container">
+            <div class="bottom-help-left-container">
                 <h2 class="bottom-h2">Masz pytania?<br>
                     Zadzwoń lub napisz do nas!</h2>
                 <p class="bottom-p">Biuro Obsługi Klienta<br>
@@ -68,14 +68,17 @@
                     kontakt@akademialekarza.online
                 </p>
             </div>
-            <div class=padded-bottom-about-text-container">
+            <div class="padded-bottom-help-text-container">
                 <h2 class="bottom-h2">Chcesz zostać sponsorem lub patronem kursu?<br>
                     Skontaktuj się z nami</h2>
-                <p class="bottom-p">Weronika Włostowska<br>
-                    Senior Key Account Manager<br>
-                    +48 501 076 131<br>
-                    w.wlostowska@medical-tribune.pl
-                </p>
+                <div class="help-avatar-container">
+                    <img class="help-avatar" src="${static.url('images/help-avatar.png')}"/>
+                    <p class="bottom-p">Weronika Włostowska<br>
+                        Senior Key Account Manager<br>
+                        +48 501 076 131<br>
+                        w.wlostowska@medical-tribune.pl
+                    </p>
+                </div>
             </div>
         </div>
     </section>

@@ -251,6 +251,7 @@ nav.wrapper-preview-menu {
 #lean_overlay {
   z-index: 250;
 }
+
 .modal {
   box-shadow: none;
   padding: 0;
@@ -265,16 +266,20 @@ nav.wrapper-preview-menu {
     }
 }
 
-.main-about-container {
+.main-help-about-container {
     padding: 30px ;
     background-color: white;
     border-radius: 8px;
     box-shadow: 0px 0px 20px 1px rgba(0,0,0,0.08);
 }
 
-.bottom-about-container {
+.help-avatar-container {
+    display: flex;
+}
+
+.bottom-help-container {
     border-radius: 8px;
-    background-color: $bottom-about-container-background-color;
+    background-color: $bottom-help-container-background-color;
     margin-top: -10px;
     display: flex !important;
     flex-wrap: wrap;
@@ -284,21 +289,28 @@ nav.wrapper-preview-menu {
         color: $white-color !important;
         font-size: 18px;
         font-weight: 700;
+        line-height: 24px;
     }
     .bottom-p {
         color: $white-color !important;
         font-size: 16px;
         font-weight: 400;
+        line-height: 28px;
     }
 }
 
-.bottom-about-left-container {
+.bottom-help-left-container {
     width: 50%;
 }
 
-.padded-bottom-about-text-container {
+.padded-bottom-help-text-container {
     padding-left: 40px;
-     border-left: 1px solid rgb(255, 255, 255);
+    border-left: 1px solid rgb(255, 255, 255);
+}
+.help-avatar {
+    margin-right: 15px;
+    width: 60px;
+    height: 60px;
 }
 
 .container {
@@ -309,7 +321,7 @@ nav.wrapper-preview-menu {
     color: #515661;
     //margin-left: 30px;
     h1 {
-      font-size: 24px;
+      font-size: 32px;
       font-weight: 700;
       line-height: 34px;
       margin: 0 0 40px;
