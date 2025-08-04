@@ -186,7 +186,7 @@ nav.wrapper-preview-menu {
 
 
 /////////////////// Course search
-.find-courses, .university-profile {
+.find-courses .university-profile {
   //background-color: #fff;
 }
 
@@ -859,7 +859,7 @@ body.indigo-dark-theme {
     accent-color: $primary-d;
     scrollbar-color: $text-color-d $body-bg-d;
   }
-  .find-courses, .university-profile {
+  .find-courses .university-profile {
   //  background-color: $body-bg-d;
   }
   .ui-state-default,
