@@ -139,14 +139,14 @@
                             text-align: center;
                             justify-content: center;
                             align-items: center;
-                            padding: 9px 17px;
+                            padding: 0px 17px;
                             font-size: 14px;
-                            line-height: 20px;
-                            margin: 0 0 30px;
-                            color: #fff;
+                            line-height: 42px;
+//                             margin: 0 0 30px;
+                            color: $white-color;
                             font-family: $font-family-main;
                             font-weight: 700;
-                            width: 130px;
+                            width: 138px;
                         }
                         .course-date {
                             border-bottom: 3px solid $course-listing-bottom-border;

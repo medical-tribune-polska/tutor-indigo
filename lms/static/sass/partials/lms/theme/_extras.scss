@@ -187,7 +187,7 @@ nav.wrapper-preview-menu {
 
 /////////////////// Course search
 .find-courses, .university-profile {
-  background-color: #fff;
+  //background-color: #fff;
 }
 
 /////////////////// User profile
@@ -860,7 +860,7 @@ body.indigo-dark-theme {
     scrollbar-color: $text-color-d $body-bg-d;
   }
   .find-courses, .university-profile {
-    background-color: $body-bg-d;
+  //  background-color: $body-bg-d;
   }
   .ui-state-default,
   .ui-widget-content
@@ -1432,7 +1432,7 @@ body.indigo-dark-theme {
     }
 
     ul.cards-list li.list-card {
-      background-color: $body-bg-d;
+//       background-color: $body-bg-d;
 
       div.wrapper-card-meta {
         background-color: $body-bg-d;
