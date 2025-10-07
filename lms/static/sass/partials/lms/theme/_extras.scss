@@ -139,7 +139,7 @@ header.global-header .nav-links .secondary .dropdown-user-menu {
 
 ////////////////// User dashboard /dashboard
 .dashboard .main-container {
-  padding: initial;
+  padding: 30px;
 }
 
 ////////////////// "View this course as staff/learner/..."
@@ -367,26 +367,28 @@ nav.wrapper-preview-menu {
   }
 }
 .wrapper-course-material[aria-label="Course Material"] {
+  padding-left: 35px;
+  padding-top: 35px;
   margin: 0 auto;
   max-width: 1600px;
   padding: 20px 15px !important;
   .tabs.course-tabs {
     margin: 0 0 10px;
-    border-bottom: 1px solid #E5E7EB;
+    border-bottom: 1px solid $primary;
     padding: 0;
     li {
       margin: 0 32px 0 0;
       a {
-        border-width: 2px;
+        border-width: 1px;
         font-size: 14px;
         font-weight: 500;
-        color: $light-dark;
+        color: $primary;
         &:hover, &:visited {
-          color: $dark;
+          color: $primary;
           border-color: transparent;
         }
         &.active {
-          color: $dark;
+          color: $primary;
           border-color: $primary;
         }
       }
@@ -473,7 +475,10 @@ body.view-instructordash {
     }
   }
   .instructor-dashboard-content-2 {
-    padding: 0;
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.10);
+    border-radius: 15px;
+    background-color: white;
+    padding: 15px;
     h2.instructor-dashboard-title {
       font-size: 24px;
       line-height: 30px;
@@ -484,12 +489,13 @@ body.view-instructordash {
       margin: 0 0 10px;
     }
     .instructor-nav {
+      background-color: #FFFFFF;
+      border-radius: 4px;
       overflow: hidden;
       width: 100%;
       white-space: nowrap;
       overflow-x: auto;
-      border: 1px solid #E5E7EB;
-      border-radius: 6px;
+      //border: 1px solid #E5E7EB;
       padding: 0 !important;
       letter-spacing: -.32em;
       li {
@@ -541,7 +547,7 @@ body.view-instructordash {
       }
     }
     #course_info > h4 {
-      background: $primary-light;
+      //background: $primary-light;
       padding: 15px 0 0 15px;
       font-size: 18px;
       color: $dark;
@@ -559,7 +565,6 @@ body.view-instructordash {
       }
     }
     #course_info  .enrollment-wrapper, .basic-wrapper, .course-errors-wrapper, .running-tasks-container {
-      background: $primary-light;
       padding: 15px;
       margin: 0 0 30px;
       h4 {
@@ -874,6 +879,7 @@ body.indigo-dark-theme {
     color: $text-color-d;
   }
   .wrapper-course-material {
+      padding: 30px;
     .tabs.course-tabs {
       border-bottom: 1px solid $primary-light-d;
       li {
@@ -1287,7 +1293,9 @@ body.indigo-dark-theme {
     color: $text-color-d !important
   }
   .instructor-dashboard-wrapper-2 {
+    padding: 25px !important;
     section.idash-section#membership .batch-beta-testers .request-res-section h3 {
+      padding: 25px;
       color: $text-color-d;
     }
     .msg-error {

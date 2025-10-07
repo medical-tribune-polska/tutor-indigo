@@ -111,10 +111,10 @@ header.global-header {
                         padding: 10px;
                         font-size: 14px;
                         line-height: 20px;
-                        color: $light-dark;
+                        color: $black-color;
                         &:hover {
-                            background: $primary-light;
-                            color: $dark;                         ;
+                            background: $superLightBackgroundColor;
+                            color: $black-color;
                         }
                     }
                 }

@@ -7,30 +7,33 @@
     border: none;
     overflow-x: auto;
     ul.navbar-nav {
-        border-bottom: 1px solid $primary-light;
+        border-bottom: 1px solid $lightBackgroundColor;
         .nav-item {
-            margin-right: 10px;
+            color: $primary;
             @include media-breakpoint-up(md) {
-                margin-right: 32px;
+                //margin-right: 32px;
             }
             a {
-                border-width: 0 0 2px;
+                color: $primary;
+                border-width: 0 0 1px;
                 padding: 0.5rem 1rem;
                 font-weight: 500;
-                font-size: 14px;
+                font-size: 15px;
                 line-height: 20px;
             }
         }
     }
 }
+
+
 .page-content-container {
+    background-color: transparent;
     .page-content {
         padding: 20px 0;
     }
     .page-header.has-secondary {
         padding: 8px 10px;
         border: none;
-        background: #F2F7F8;
         border-radius: 6px;
         .breadcrumbs {
             font-weight: 500;
@@ -42,7 +45,7 @@
         max-width: 100%;
     }
     .bookmarks-empty {
-        box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.05);
+        box-shadow: 0px 0px 15px rgba(0,0,0,0.10);
         border: none;
         border-radius: 8px;
         padding: 20px;
@@ -79,8 +82,9 @@
 .course-bookmarks {
     .bookmarks-results-list {
         a.bookmarks-results-list-item {
-            border: 1px solid #E5E7EB;
-            border-left: 8px solid $primary-light;
+            border: 0px;
+            background-color: #FFFFFF;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             padding: 20px 30px;
             border-radius: 8px;
             position: relative;
@@ -90,14 +94,14 @@
                 left: 5px;
                 font-size: 17px;
                 line-height: 17px;
-                color: $primary-d;
+                color: $primary;
             }
             &:hover {
                 text-decoration: none;
             }
             h3 {
                 font-size: 18px;
-                font-weight: 600;
+                font-weight: 700;
                 color: $dark;
                 .icon {
                     width: 12px;
@@ -153,18 +157,18 @@
         font-size: 30px;
         padding: 0;
         background: none !important;
-        color: #515661 !important;
+        color: $primary !important;
         line-height: 30px;
     }
     .current-page, .page-number-input, .total-pages {
-        color: #313131;
+        color: $primary;
         font-size: 14px;
         font-weight: 600;
         margin: 0 4px;
     }
     .page-divider {
         font-weight: bold;
-        color: #515661;
+        color: $primary;
     }
 }
 body.indigo-dark-theme {
