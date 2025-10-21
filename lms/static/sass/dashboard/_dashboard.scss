@@ -30,9 +30,33 @@
 .top-text-container {
     display: flex;
     flex-direction: column;
-    padding-left: 50px;
-    padding-top: 80px;
+    padding-left: 40px;
+    padding-top: 40px;
     flex-grow: 2;
+}
+
+@media only screen and (max-width: 540px) and (min-width: 500px) {
+    .top-text-container {
+        max-width: 400px;
+        padding-left: 40px;
+        padding-top: 40px;
+    }
+}
+
+@media only screen and (max-width: 499px) and (min-width: 441px) {
+    .top-text-container {
+        max-width: 377px;
+        padding-left: 30px;
+        padding-top: 30px;
+    }
+}
+
+@media only screen and (max-width: 440px) {
+    .top-text-container {
+        max-width: 360px;
+        padding-left: 10px;
+        padding-top: 20px;
+    }
 }
 
 .triangle-white-polygon {
@@ -46,7 +70,7 @@
 }
 
 .top-buttons-container {
-    margin-top: 60px;
+    margin-top: 40px;
     display: flex !important;
     flex-grow: 2;
     z-index: 10;
@@ -109,8 +133,8 @@
 .top-background-title {
     max-width: 450px;
     color: white;
-    font-size: 37px;
-    line-height: 40px;
+    font-size: 30px;
+    line-height: 37px;
     font-weight: 700;
     font-family: $font-family-title !important;
     text-align: start;
@@ -119,8 +143,8 @@
 .top-background-text {
     max-width: 585px;
     color: white;
-    font-size: 20px;
-    line-height: 28px;
+    font-size: 17px;
+    line-height: 25px;
     font-weight: 400;
     font-family: $font-family-title !important;
     text-align: start;
@@ -154,6 +178,15 @@
     display: block;
     z-index: 10;
     max-width: 250px;
+}
+
+@media only screen and (max-width: 529px) {
+    .info-container {
+        display: block;
+        z-index: 10;
+        padding: 16px;
+        max-width: 498px;
+    }
 }
 
 .info-title {

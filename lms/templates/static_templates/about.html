@@ -11,17 +11,26 @@
             <%block name="pageheader">${page_header or _("About")}</%block>
         </h1>
         <div class="main-help-about-container">
-            <h2>
-                Kim jesteśmy?
-            </h2>
-            <p>
-                Jesteśmy częścią serwisu podyplomie.pl – lidera rzetelnej i praktycznej
-                edukacji medycznej . Tworzymy przestrzeń, w której możesz zdobywać
-                najnowszą, specjalistyczną i dostosowaną do Twoich potrzeb wiedzę, rozwijać
-                praktyczne umiejętności i potwierdzać kompetencje poprzez akredytowane
-                kursy online. Naszym celem jest wspieranie Cię w codziennej pracy lekarskiej
-                oraz w długofalowym rozwoju zawodowym.
-            </p>
+            <div class="about-top-container">
+                <div class="padding-left-30 min-width-300">
+                    <h2 class="margin-top-100">
+                        Kim jesteśmy?
+                    </h2>
+                    <p class="max-width-600">
+                        Jesteśmy częścią serwisu podyplomie.pl – lidera rzetelnej i praktycznej
+                        edukacji medycznej . Tworzymy przestrzeń, w której możesz zdobywać
+                        najnowszą, specjalistyczną i dostosowaną do Twoich potrzeb wiedzę, rozwijać
+                        praktyczne umiejętności i potwierdzać kompetencje poprzez akredytowane
+                        kursy online. Naszym celem jest wspieranie Cię w codziennej pracy lekarskiej
+                        oraz w długofalowym rozwoju zawodowym.
+                    </p>
+                </div>
+                <div class="about-image-container">
+                    <img class="about_us_bg" src="${static.url('images/about_us_bg.png')}"/>
+                    <img class="about_us_photo" src="${static.url('images/about_us_photo.png')}"/>
+                </div>
+            </div>
+            <div class="separator"></div>
             <h2>
                 Co oferujemy?
             </h2>

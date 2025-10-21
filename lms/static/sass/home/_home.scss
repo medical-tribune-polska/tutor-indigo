@@ -4,6 +4,13 @@ section.home {
     margin: 0 auto;
     padding: 0 15px;
 }
+
+@media only screen and (max-width: 400px) {
+    section.home {
+        padding: 0 0px;
+    }
+}
+
 .home>header .title {
     background: none !important;
 }
