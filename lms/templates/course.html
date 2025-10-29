@@ -6,12 +6,14 @@ from django.urls import reverse
 %>
 <%page args="course" expression_filter="h"/>
 <article class="course" id="${course.id}" role="region" aria-label="${course.display_name_with_default}">
+  <!-- FIXED: Opakowany cały kafelek w link aby tytuł był klikalny -->
+  <a href="${reverse('about_course', args=[str(course.id)])}">
     <header class="course-image">
       <div class="cover-image">
           <!-- NEW IN INDIGO: Add fallback image in case of no course-image using onerror -->
           <img src="${course.course_image_url}" onerror="this.src='/theming/asset/images/no_course_image.png';" alt="${course.display_name_with_default} ${course.display_number_with_default}" />
-          <!-- NEW IN INDIGO Learn more button is displayed under the course image instead of the hover functionality. -->
-          <a href="${reverse('about_course', args=[str(course.id)])}" class="learn-more">${_("Learn More")}</a>
+          <!-- NEW IN INDIGO: Learn more button is displayed under the course image instead of the hover functionality. -->
+          <div class="learn-more" aria-hidden="true">${_("Learn More")}</div>
       </div>
     </header>
     <div class="course-info" aria-hidden="true">
@@ -50,6 +52,7 @@ from django.urls import reverse
         % endif
       </ul>
     </div>
+  </a>
 </article>
 <%static:require_module_async module_name="js/dateutil_factory" class_name="DateUtilFactory">
     DateUtilFactory.transform(iterationKey=".localized_datetime");
