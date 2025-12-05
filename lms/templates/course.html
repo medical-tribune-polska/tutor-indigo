@@ -6,7 +6,6 @@ from django.urls import reverse
 %>
 <%page args="course" expression_filter="h"/>
 <article class="course" id="${course.id}" role="region" aria-label="${course.display_name_with_default}">
-  <!-- FIXED: Opakowany cały kafelek w link aby tytuł był klikalny -->
   <a href="${reverse('about_course', args=[str(course.id)])}">
     <header class="course-image">
       <div class="cover-image">

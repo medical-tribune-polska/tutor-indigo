@@ -1,0 +1,417 @@
+<%page expression_filter="h"/>
+<%! from django.utils.translation import gettext as _ %>
+<%namespace name='static' file='../static_content.html'/>
+
+<%
+try:
+    _agenda = agendaItems
+except:
+    _agenda = []
+
+try:
+    _scientific = scientificDirector
+except:
+    _scientific = ''
+
+try:
+    _registry = registryNumber
+except:
+    _registry = ''
+
+try:
+    _edu_points = educationalPoints
+except:
+    _edu_points = ''
+%>
+
+<style>
+    :root {
+        --text-dark: #1d1d1b;
+        --text-grey: #4a4a4a;
+        --bg-white: #ffffff;
+        --font-main: 'Montserrat', sans-serif;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    .accomplishment-main {
+        font-family: var(--font-main) !important;
+        background-color: #f0f0f0 !important;
+        color: var(--text-dark);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+
+    /* A4 Container Layout */
+    .page {
+        width: 100%;
+        max-width: 1123px; /* A4 landscape width */
+        aspect-ratio: 297/210; /* A4 Landscape ratio */
+        background: var(--bg-white);
+        position: relative;
+        margin-bottom: 40px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        overflow: hidden;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* --- Decorative Background Elements (SVG) --- */
+    .decorations {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .blob-corner-top {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 35%;
+        height: auto;
+    }
+
+    .blob-corner-bottom {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 30%;
+        height: auto;
+    }
+
+    /* Inner Border Frame */
+    .frame-border {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    /* Subtle horizontal lines pattern background */
+    .page::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: repeating-linear-gradient(0deg, transparent, transparent 9px, #f9f9f9 10px);
+        z-index: 0;
+    }
+
+    /* Floating Shapes (Confetti) - Positioning */
+    .shape {
+        position: absolute;
+        z-index: 2;
+        overflow: visible;
+    }
+
+    /* Positioning specific shapes based on design */
+    .s-1 { top: 6%; left: 8%; width: 30px; height: 30px; } /* Circle top left */
+    .s-2 { top: 8%; left: 35%; width: 25px; height: 25px; } /* Square top center */
+    .s-3 { top: 10%; left: 62%; width: 30px; height: 30px; } /* Triangle top center */
+    .s-4 { top: 35%; left: 5%; width: 100px; height: 30px; } /* Zigzag left */
+    .s-5 { top: 50%; left: 5%; width: 25px; height: 25px; } /* Square left */
+    .s-6 { top: 40%; right: 12%; width: 30px; height: 30px; } /* Circle right */
+    .s-7 { top: 52%; right: 5%; width: 80px; height: 30px; } /* Zigzag right */
+
+
+    /* --- Content Layer --- */
+    .content-wrapper {
+        position: relative;
+        z-index: 10;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: center;
+        padding: 2% 5%;
+    }
+
+    /* Page 1 Specifics */
+    .date-top {
+        font-size: 0.9rem;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        color: var(--text-dark);
+    }
+
+    h1.cert-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #111;
+    }
+
+    .cert-subtitle {
+        font-size: 1.4rem;
+        font-weight: 400;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+    }
+
+    .cert-topic {
+        font-size: 1.5rem;
+        font-weight: 500;
+        margin-bottom: 40px;
+    }
+
+    .attendee-name {
+        font-size: 3rem;
+        font-weight: 400;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+        letter-spacing: 1px;
+    }
+
+    .attendee-number {
+        font-size: 1rem;
+        color: var(--text-grey);
+        margin-bottom: 30px;
+    }
+
+    .legal-text {
+        font-size: 0.85rem;
+        line-height: 1.5;
+        max-width: 85%;
+        margin: 0 auto 50px auto;
+        color: #333;
+    }
+
+    .footer-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 20px;
+        position: relative;
+        padding: 0 50px;
+    }
+
+    .signature-block {
+        text-align: center;
+        width: 35%;
+    }
+
+    .sig-title {
+        font-size: 0.8rem;
+        color: var(--text-grey);
+        margin-bottom: 10px;
+    }
+
+    .sig-img {
+        height: 50px;
+        margin-bottom: 5px;
+        font-family: 'Cursive', serif;
+        font-size: 1.5rem;
+        color: #555;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .sig-name {
+        font-size: 0.9rem;
+        border-top: 1px solid #ccc;
+        padding-top: 5px;
+        font-weight: 500;
+    }
+
+    /* Page 2 Specifics (Agenda) */
+    .agenda-header {
+        margin-top: 100px;
+        font-size: 1.2rem;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        margin-bottom: 50px;
+        font-weight: 600;
+    }
+
+    .agenda-list {
+        list-style: none;
+        max-width: 90%;
+        margin: 0 auto;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .agenda-item h3 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 5px;
+        color: #000;
+    }
+
+    .agenda-item p {
+        font-size: 1rem;
+        font-weight: 400;
+        color: #333;
+    }
+
+    /* Global SVG Styles */
+    .grad-stroke {
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    /* Responsive Scaling */
+    @media (max-width: 800px) {
+        .page {
+            height: auto;
+            aspect-ratio: auto;
+            padding-bottom: 60px;
+        }
+        h1.cert-title { font-size: 2rem; }
+        .cert-subtitle, .cert-topic { font-size: 1rem; }
+        .attendee-name { font-size: 1.8rem; }
+        .footer-section { flex-direction: column; gap: 30px; align-items: center; padding: 0; }
+        .signature-block { width: 80%; }
+        .blob-corner-bottom { width: 50%; }
+    }
+
+    /* Print Styles */
+    @media print {
+        .accomplishment-main {
+            background: none !important;
+            padding: 0;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        .page {
+            margin: 0;
+            box-shadow: none;
+            page-break-after: always;
+            width: 100%;
+            height: 100vh;
+        }
+    }
+</style>
+
+<!-- GLOBAL SVG DEFINITIONS (Hidden) -->
+<!-- Defines the gradient used by all orange elements -->
+<svg width="0" height="0" style="position: absolute;">
+    <defs>
+        <linearGradient id="orangeGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#F37021;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#FFAF7B;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+</svg>
+
+<main class="accomplishment accomplishment-main">
+
+<!-- PAGE 1: CERTIFICATE -->
+<div class="page">
+    <div class="frame-border"></div>
+
+    <div class="decorations">
+        <!-- Top Right Blob (Wavy) with Gradient -->
+        <svg class="blob-corner-top" viewBox="0 0 400 300" preserveAspectRatio="none">
+            <path d="M0,0 L400,0 L400,300 C300,250 200,280 150,150 C100,50 50,20 0,0 Z" fill="url(#orangeGrad)" />
+        </svg>
+
+        <!-- Bottom Left Blob (Wavy) with Gradient -->
+        <svg class="blob-corner-bottom" viewBox="0 0 300 300" preserveAspectRatio="none">
+            <path d="M0,0 C 50,120 120,180 300,300 L 0,300 Z" fill="url(#orangeGrad)" />
+        </svg>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="date-top">${certificate_date_issued}</div>
+        <div>
+            <h1 class="cert-title">Certyfikat Uczestnictwa</h1>
+            <div class="cert-subtitle">W KURSIE ${accomplishment_copy_course_org}:</div>
+            <div class="cert-topic">${accomplishment_copy_course_name}</div>
+        </div>
+        <div>
+            <div class="attendee-name">${accomplishment_copy_name}</div>
+            <div class="attendee-number">${_("Numer certyfikatu")}: ${certificate_id_number}</div>
+        </div>
+        <div class="legal-text">
+            % if _registry:
+            Numer wpisu do rejestru podmiotów prowadzących kształcenie Okręgowej Rady Lekarskiej w Warszawie ${_registry}. Na podstawie Rozporządzenia Ministra Zdrowia z dnia 21 lutego 2022 r. w sprawie sposobu dopełnienia obowiązku doskonalenia zawodowego lekarzy i lekarzy dentystów oraz udokumentowanej liczby godzin uczestnictwa w kongresie lekarzowi przysługują <strong>${_edu_points}</strong>.
+            % else:
+            ${accomplishment_copy_course_description}
+            % endif
+        </div>
+        <div class="footer-section">
+            % if _scientific:
+            <div class="signature-block">
+                <div class="sig-title">Kierownik naukowy konferencji:</div>
+                <div class="sig-img"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iNTAiPjxwYXRoIGQ9Ik0xMCw0MCBDMzAsMTAgNjAsNjAgODAsMzAgTTEwMCw0MCBDMTIwLDIwIDE0MCw1MCAxOTAsMzAiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsPSJub25lIi8+PC9zdmc+" alt="Podpis" style="height: 40px;"></div>
+                <div class="sig-name">${_scientific}</div>
+            </div>
+            % endif
+            % if certificate_data:
+                % for signatory in certificate_data.get('signatories', []):
+                    % if signatory.get('signature_image_path'):
+                        <div class="signature-block">
+                            <div class="sig-title">Organizator:</div>
+                            <div style="font-weight: 700; font-size: 0.8rem; margin-bottom:5px;">${signatory['organization']}</div>
+                            <div class="sig-img"><img src="${static.url(signatory['signature_image_path'])}" alt="${signatory['name']}" style="height: 40px;"></div>
+                            <div class="sig-name">${signatory['title']} ${signatory['name']}</div>
+                        </div>
+                    % endif
+                % endfor
+            % endif
+        </div>
+    </div>
+</div>
+
+<!-- PAGE 2: AGENDA (tylko gdy są dane agendy) -->
+<div class="page">
+    <div class="frame-border"></div>
+
+    <div class="decorations">
+        <svg class="blob-corner-top" viewBox="0 0 400 300" preserveAspectRatio="none">
+            <path d="M0,0 L400,0 L400,300 C300,250 200,280 150,150 C100,50 50,20 0,0 Z" fill="url(#orangeGrad)" />
+        </svg>
+
+        <svg class="blob-corner-bottom" viewBox="0 0 300 300" preserveAspectRatio="none">
+            <path d="M0,0 C 50,120 120,180 300,300 L 0,300 Z" fill="url(#orangeGrad)" />
+        </svg>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="agenda-header">Agenda</div>
+        <ul class="agenda-list">
+            % if _agenda:
+                % for item in _agenda:
+                <li class="agenda-item">
+                    <h3>${item['title']}</h3>
+                    <p>– ${item['speaker']}</p>
+                </li>
+                % endfor
+            % else:
+            <li class="agenda-item">
+                <p>${_("Brak danych agendy - uzupełnij w ustawieniach zaawansowanych kursu")}</p>
+            </li>
+            % endif
+        </ul>
+    </div>
+</div>
+
+</main>
