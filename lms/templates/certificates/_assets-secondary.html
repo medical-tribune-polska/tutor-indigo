@@ -1,0 +1,16 @@
+<script type="text/javascript">
+
+    document.getElementById("action-print-view").addEventListener("click", printView);
+    
+    // Dodaj listener dla przycisku PDF jeśli istnieje
+    const pdfButton = document.getElementById("action-export-pdf");
+    if (pdfButton) {
+        pdfButton.addEventListener("click", printView); // Używamy tej samej funkcji
+    }
+
+    function printView(event) {
+       event.preventDefault();
+       window.print();
+    }
+</script>
+

@@ -45,6 +45,8 @@ signatory_descriptions = ['Kierownik Naukowy', 'Organizator']
         flex-direction: column;
         align-items: center;
         padding: 20px;
+        width: 100%;
+        max-width: 100%;
     }
 
     /* A4 Container Layout */
@@ -52,6 +54,7 @@ signatory_descriptions = ['Kierownik Naukowy', 'Organizator']
         width: 100%;
         max-width: 1123px; /* A4 landscape width */
         aspect-ratio: 297/210; /* A4 Landscape ratio */
+        min-height: 794px; /* A4 landscape height in px at 96dpi */
         background: var(--bg-white);
         position: relative;
         margin-bottom: 40px;
@@ -60,6 +63,8 @@ signatory_descriptions = ['Kierownik Naukowy', 'Organizator']
         padding: 40px;
         display: flex;
         flex-direction: column;
+        page-break-after: always;
+        page-break-inside: avoid;
     }
 
     /* --- Decorative Background Elements (SVG) --- */
@@ -290,19 +295,71 @@ signatory_descriptions = ['Kierownik Naukowy', 'Organizator']
     }
 
     /* Print Styles */
+    @page {
+        size: A4 landscape;
+        margin: 0;
+    }
+    
     @media print {
-        .accomplishment-main {
-            background: none !important;
-            padding: 0;
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
+        /* Ukryj bannery z przyciskami */
+        .wrapper-banner-user,
+        .banner-user {
+            display: none !important;
         }
+        
+        body {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        
+        .accomplishment-main {
+            padding: 10px !important;
+            margin: 0 !important;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+        
         .page {
-            margin: 0;
-            box-shadow: none;
-            page-break-after: always;
-            width: 100%;
-            height: 100vh;
+            max-width: 1010px !important;
+            min-height: 715px !important;
+            padding: 36px !important;
+            page-break-after: always !important;
+            page-break-inside: avoid !important;
+            box-shadow: none !important;
+            margin: 0 auto !important;
+        }
+        
+        .page:last-child {
+            page-break-after: auto !important;
+        }
+        
+        /* Zmniejsz czcionki do 90% */
+        h1.cert-title {
+            font-size: 3.15rem !important;
+        }
+        
+        .cert-subtitle,
+        .cert-topic {
+            font-size: 1.3rem !important;
+        }
+        
+        .attendee-name {
+            font-size: 2.7rem !important;
+            margin-bottom: 5px !important;
+        }
+        
+        .attendee-number {
+            font-size: 0.9rem !important;
+            margin-bottom: 25px !important;
+        }
+        
+        .legal-text {
+            font-size: 0.75rem !important;
+            margin-bottom: 40px !important;
+        }
+        
+        .content-wrapper {
+            padding: 1.5% 4% !important;
         }
     }
 </style>
@@ -343,10 +400,10 @@ signatory_descriptions = ['Kierownik Naukowy', 'Organizator']
             <div class="cert-subtitle">W KURSIE ${accomplishment_copy_course_org}:</div>
             <div class="cert-topic">${accomplishment_copy_course_name}</div>
         </div>
-<!--        <div>-->
-<!--            <div class="attendee-name">${accomplishment_copy_name}</div>-->
-<!--            <div class="attendee-number">${_("Numer certyfikatu")}: ${certificate_id_number}</div>-->
-<!--        </div>-->
+        <div>
+            <div class="attendee-name">${accomplishment_copy_name}</div>
+            <div class="attendee-number">${_("Numer certyfikatu")}: ${certificate_id_number}</div>
+        </div>
         <div class="legal-text">
             % if _registry:
             Numer wpisu do rejestru podmiotów prowadzących kształcenie Okręgowej Rady Lekarskiej w Warszawie ${_registry}. Na podstawie Rozporządzenia Ministra Zdrowia z dnia 21 lutego 2022 r. w sprawie sposobu dopełnienia obowiązku doskonalenia zawodowego lekarzy i lekarzy dentystów oraz udokumentowanej liczby godzin uczestnictwa w kongresie lekarzowi przysługują <strong>${_edu_points}</strong>.
@@ -374,6 +431,7 @@ signatory_descriptions = ['Kierownik Naukowy', 'Organizator']
 </div>
 
 <!-- PAGE 2: AGENDA (tylko gdy są dane agendy) -->
+% if _agenda:
 <div class="page">
     <div class="frame-border"></div>
 
@@ -390,20 +448,15 @@ signatory_descriptions = ['Kierownik Naukowy', 'Organizator']
     <div class="content-wrapper">
         <div class="agenda-header">Agenda</div>
         <ul class="agenda-list">
-            % if _agenda:
-                % for item in _agenda:
-                <li class="agenda-item">
-                    <h3>${item['title']}</h3>
-                    <p>– ${item['speaker']}</p>
-                </li>
-                % endfor
-            % else:
+            % for item in _agenda:
             <li class="agenda-item">
-                <p>${_("Brak danych agendy - uzupełnij w ustawieniach zaawansowanych kursu")}</p>
+                <h3>${item['title']}</h3>
+                <p>– ${item['speaker']}</p>
             </li>
-            % endif
+            % endfor
         </ul>
     </div>
 </div>
+% endif
 
 </main>
