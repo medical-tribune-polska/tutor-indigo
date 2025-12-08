@@ -9,11 +9,6 @@ except:
     _agenda = []
 
 try:
-    _scientific = scientificDirector
-except:
-    _scientific = ''
-
-try:
     _registry = registryNumber
 except:
     _registry = ''
@@ -22,6 +17,8 @@ try:
     _edu_points = educationalPoints
 except:
     _edu_points = ''
+
+signatory_descriptions = ['Kierownik Naukowy', 'Organizator']
 %>
 
 <style>
@@ -346,10 +343,10 @@ except:
             <div class="cert-subtitle">W KURSIE ${accomplishment_copy_course_org}:</div>
             <div class="cert-topic">${accomplishment_copy_course_name}</div>
         </div>
-        <div>
-            <div class="attendee-name">${accomplishment_copy_name}</div>
-            <div class="attendee-number">${_("Numer certyfikatu")}: ${certificate_id_number}</div>
-        </div>
+<!--        <div>-->
+<!--            <div class="attendee-name">${accomplishment_copy_name}</div>-->
+<!--            <div class="attendee-number">${_("Numer certyfikatu")}: ${certificate_id_number}</div>-->
+<!--        </div>-->
         <div class="legal-text">
             % if _registry:
             Numer wpisu do rejestru podmiotów prowadzących kształcenie Okręgowej Rady Lekarskiej w Warszawie ${_registry}. Na podstawie Rozporządzenia Ministra Zdrowia z dnia 21 lutego 2022 r. w sprawie sposobu dopełnienia obowiązku doskonalenia zawodowego lekarzy i lekarzy dentystów oraz udokumentowanej liczby godzin uczestnictwa w kongresie lekarzowi przysługują <strong>${_edu_points}</strong>.
@@ -358,18 +355,13 @@ except:
             % endif
         </div>
         <div class="footer-section">
-            % if _scientific:
-            <div class="signature-block">
-                <div class="sig-title">Kierownik naukowy konferencji:</div>
-                <div class="sig-img"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iNTAiPjxwYXRoIGQ9Ik0xMCw0MCBDMzAsMTAgNjAsNjAgODAsMzAgTTEwMCw0MCBDMTIwLDIwIDE0MCw1MCAxOTAsMzAiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsPSJub25lIi8+PC9zdmc+" alt="Podpis" style="height: 40px;"></div>
-                <div class="sig-name">${_scientific}</div>
-            </div>
-            % endif
             % if certificate_data:
-                % for signatory in certificate_data.get('signatories', []):
+                % for idx, signatory in enumerate(certificate_data.get('signatories', [])):
                     % if signatory.get('signature_image_path'):
                         <div class="signature-block">
-                            <div class="sig-title">Organizator:</div>
+                            % if idx < len(signatory_descriptions):
+                                <div class="sig-title">${signatory_descriptions[idx]}:</div>
+                            % endif
                             <div style="font-weight: 700; font-size: 0.8rem; margin-bottom:5px;">${signatory['organization']}</div>
                             <div class="sig-img"><img src="${static.url(signatory['signature_image_path'])}" alt="${signatory['name']}" style="height: 40px;"></div>
                             <div class="sig-name">${signatory['title']} ${signatory['name']}</div>
