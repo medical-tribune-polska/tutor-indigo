@@ -186,9 +186,11 @@ signatory_descriptions = ['Kierownik Naukowy', 'Organizator']
         letter-spacing: 1px;
     }
 
-    .attendee-number {
-        font-size: 1rem;
+    .attendee-npwz {
+        font-size: 1.1rem;
         color: var(--text-grey);
+        font-weight: 500;
+        margin-top: 5px;
         margin-bottom: 30px;
     }
 
@@ -348,8 +350,9 @@ signatory_descriptions = ['Kierownik Naukowy', 'Organizator']
             margin-bottom: 5px !important;
         }
         
-        .attendee-number {
-            font-size: 0.9rem !important;
+        .attendee-npwz {
+            font-size: 1rem !important;
+            margin-top: 3px !important;
             margin-bottom: 25px !important;
         }
         
@@ -402,7 +405,9 @@ signatory_descriptions = ['Kierownik Naukowy', 'Organizator']
         </div>
         <div>
             <div class="attendee-name">${accomplishment_copy_name}</div>
-            <div class="attendee-number">${_("Numer certyfikatu")}: ${certificate_id_number}</div>
+            % if user_npwz:
+            <div class="attendee-npwz">NPWZ: ${user_npwz}</div>
+            % endif
         </div>
         <div class="legal-text">
             % if _registry:
