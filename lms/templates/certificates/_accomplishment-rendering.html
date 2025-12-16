@@ -8,6 +8,11 @@ try:
 except:
     _agenda = []
 
+<!--try:-->
+<!--    _scientific = scientificDirector-->
+<!--except:-->
+<!--    _scientific = ''-->
+
 try:
     _registry = registryNumber
 except:
@@ -45,8 +50,6 @@ signatory_descriptions = ['Kierownik Naukowy', 'Organizator']
         flex-direction: column;
         align-items: center;
         padding: 20px;
-        width: 100%;
-        max-width: 100%;
     }
 
     /* A4 Container Layout */
@@ -54,7 +57,6 @@ signatory_descriptions = ['Kierownik Naukowy', 'Organizator']
         width: 100%;
         max-width: 1123px; /* A4 landscape width */
         aspect-ratio: 297/210; /* A4 Landscape ratio */
-        min-height: 794px; /* A4 landscape height in px at 96dpi */
         background: var(--bg-white);
         position: relative;
         margin-bottom: 40px;
@@ -63,8 +65,6 @@ signatory_descriptions = ['Kierownik Naukowy', 'Organizator']
         padding: 40px;
         display: flex;
         flex-direction: column;
-        page-break-after: always;
-        page-break-inside: avoid;
     }
 
     /* --- Decorative Background Elements (SVG) --- */
@@ -186,11 +186,9 @@ signatory_descriptions = ['Kierownik Naukowy', 'Organizator']
         letter-spacing: 1px;
     }
 
-    .attendee-npwz {
-        font-size: 1.1rem;
+    .attendee-number {
+        font-size: 1rem;
         color: var(--text-grey);
-        font-weight: 500;
-        margin-top: 5px;
         margin-bottom: 30px;
     }
 
@@ -297,72 +295,19 @@ signatory_descriptions = ['Kierownik Naukowy', 'Organizator']
     }
 
     /* Print Styles */
-    @page {
-        size: A4 landscape;
-        margin: 0;
-    }
-    
     @media print {
-        /* Ukryj bannery z przyciskami */
-        .wrapper-banner-user,
-        .banner-user {
-            display: none !important;
-        }
-        
-        body {
-            margin: 0 !important;
-            padding: 0 !important;
-        }
-        
         .accomplishment-main {
-            padding: 10px !important;
-            margin: 0 !important;
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
+            background: none !important;
+            padding: 0;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
         }
-        
         .page {
-            max-width: 1010px !important;
-            min-height: 715px !important;
-            padding: 36px !important;
-            page-break-after: always !important;
-            page-break-inside: avoid !important;
-            box-shadow: none !important;
-            margin: 0 auto !important;
-        }
-        
-        .page:last-child {
-            page-break-after: auto !important;
-        }
-        
-        /* Zmniejsz czcionki do 90% */
-        h1.cert-title {
-            font-size: 3.15rem !important;
-        }
-        
-        .cert-subtitle,
-        .cert-topic {
-            font-size: 1.3rem !important;
-        }
-        
-        .attendee-name {
-            font-size: 2.7rem !important;
-            margin-bottom: 5px !important;
-        }
-        
-        .attendee-npwz {
-            font-size: 1rem !important;
-            margin-top: 3px !important;
-            margin-bottom: 25px !important;
-        }
-        
-        .legal-text {
-            font-size: 0.75rem !important;
-            margin-bottom: 40px !important;
-        }
-        
-        .content-wrapper {
-            padding: 1.5% 4% !important;
+            margin: 0;
+            box-shadow: none;
+            page-break-after: always;
+            width: 100%;
+            height: 100vh;
         }
     }
 </style>
@@ -405,9 +350,7 @@ signatory_descriptions = ['Kierownik Naukowy', 'Organizator']
         </div>
         <div>
             <div class="attendee-name">${accomplishment_copy_name}</div>
-            % if user_npwz:
-            <div class="attendee-npwz">NPWZ: ${user_npwz}</div>
-            % endif
+            <div class="attendee-number">${_("Numer certyfikatu")}: ${certificate_id_number}</div>
         </div>
         <div class="legal-text">
             % if _registry:
@@ -417,13 +360,18 @@ signatory_descriptions = ['Kierownik Naukowy', 'Organizator']
             % endif
         </div>
         <div class="footer-section">
+<!--            % if _scientific:-->
+<!--            <div class="signature-block">-->
+<!--                <div class="sig-title">Kierownik naukowy konferencji:</div>-->
+<!--                <div class="sig-img"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iNTAiPjxwYXRoIGQ9Ik0xMCw0MCBDMzAsMTAgNjAsNjAgODAsMzAgTTEwMCw0MCBDMTIwLDIwIDE0MCw1MCAxOTAsMzAiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsPSJub25lIi8+PC9zdmc+" alt="Podpis" style="height: 40px;"></div>-->
+<!--                <div class="sig-name">${_scientific}</div>-->
+<!--            </div>-->
+<!--            % endif-->
             % if certificate_data:
-                % for idx, signatory in enumerate(certificate_data.get('signatories', [])):
+                % for signatory in certificate_data.get('signatories', []):
                     % if signatory.get('signature_image_path'):
                         <div class="signature-block">
-                            % if idx < len(signatory_descriptions):
-                                <div class="sig-title">${signatory_descriptions[idx]}:</div>
-                            % endif
+                            <div class="sig-title">Organizator:</div>
                             <div style="font-weight: 700; font-size: 0.8rem; margin-bottom:5px;">${signatory['organization']}</div>
                             <div class="sig-img"><img src="${static.url(signatory['signature_image_path'])}" alt="${signatory['name']}" style="height: 40px;"></div>
                             <div class="sig-name">${signatory['title']} ${signatory['name']}</div>
@@ -436,7 +384,6 @@ signatory_descriptions = ['Kierownik Naukowy', 'Organizator']
 </div>
 
 <!-- PAGE 2: AGENDA (tylko gdy są dane agendy) -->
-% if _agenda:
 <div class="page">
     <div class="frame-border"></div>
 
@@ -453,15 +400,20 @@ signatory_descriptions = ['Kierownik Naukowy', 'Organizator']
     <div class="content-wrapper">
         <div class="agenda-header">Agenda</div>
         <ul class="agenda-list">
-            % for item in _agenda:
+            % if _agenda:
+                % for item in _agenda:
+                <li class="agenda-item">
+                    <h3>${item['title']}</h3>
+                    <p>– ${item['speaker']}</p>
+                </li>
+                % endfor
+            % else:
             <li class="agenda-item">
-                <h3>${item['title']}</h3>
-                <p>– ${item['speaker']}</p>
+                <p>${_("Brak danych agendy - uzupełnij w ustawieniach zaawansowanych kursu")}</p>
             </li>
-            % endfor
+            % endif
         </ul>
     </div>
 </div>
-% endif
 
 </main>
