@@ -4,10 +4,10 @@
     @include media-breakpoint-up(md) {
         padding: 30px;
     }
-}§§
-.bottom-image {
-
 }
+
+
+
 footer.tutor-container {
     margin: 0 auto;
     //padding: 0 15px;
@@ -38,8 +38,9 @@ footer.tutor-container {
 //                 float: left;
 //             }
         }
-        .logo-big {
-            width: 200px;
+
+        .footer-left-logo {
+            width: 150px;
         }
     }
     .logo-list {
