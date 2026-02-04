@@ -26,10 +26,45 @@ except:
         --text-dark: #1d1d1b;
         --text-grey: #4a4a4a;
         --bg-white: #ffffff;
-        --font-main: 'Montserrat', sans-serif;
+        --font-main: 'Switzer', sans-serif;
+        --font-title: 'Cinzel', serif;
     }
 
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+    /* Cinzel - dla nagłówka CERTYFIKAT */
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&display=swap');
+    
+    /* Switzer - font główny */
+    @font-face {
+        font-family: 'Switzer';
+        src: url("${static.url('fonts/Switzer-Regular.woff2')}") format('woff2');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+    }
+    
+    @font-face {
+        font-family: 'Switzer';
+        src: url("${static.url('fonts/Switzer-Medium.woff2')}") format('woff2');
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+    }
+    
+    @font-face {
+        font-family: 'Switzer';
+        src: url("${static.url('fonts/Switzer-Semibold.woff2')}") format('woff2');
+        font-weight: 600;
+        font-style: normal;
+        font-display: swap;
+    }
+    
+    @font-face {
+        font-family: 'Switzer';
+        src: url("${static.url('fonts/Switzer-Bold.woff2')}") format('woff2');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+    }
 
     * {
         box-sizing: border-box;
@@ -96,6 +131,7 @@ except:
     }
 
     .cert-title {
+        font-family: var(--font-title);
         font-size: 3.5rem;
         font-weight: 700;
         color: var(--teal-primary);
@@ -106,6 +142,7 @@ except:
     }
 
     .cert-subtitle {
+        font-family: var(--font-title);
         font-size: 1.6rem;
         font-weight: 400;
         color: var(--teal-primary);
