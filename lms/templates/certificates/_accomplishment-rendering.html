@@ -348,7 +348,7 @@ except:
 
             <!-- License/Registry Info -->
             <div class="license-section">
-                <div class="license-label">NR PRAWA WYKONYWANIA ZAWODU:</div>
+                <div class="license-label">NR PRAWA WYKONYWANIA ZAWODU: ${_user_npwz if _user_npwz else ''}</div>
                 <div class="license-text">
                     % if _registry:
                     Numer wpisu do rejestru podmiotów prowadzących kształcenie Okręgowej Rady Lekarskiej w Warszawie ${_registry}. Na podstawie Rozporządzenia Ministra Zdrowia z dnia 21 lutego 2022 r. w sprawie sposobu dopełnienia obowiązku doskonalenia zawodowego lekarzy i lekarzy dentystów oraz udokumentowanej liczby godzin uczestnictwa w kursie lekarzowi przysługują ${_edu_points} punkty edukacyjne
