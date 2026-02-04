@@ -4,16 +4,6 @@
 
 <%
 try:
-    _agenda = agendaItems
-except:
-    _agenda = []
-
-<!--try:-->
-<!--    _scientific = scientificDirector-->
-<!--except:-->
-<!--    _scientific = ''-->
-
-try:
     _registry = registryNumber
 except:
     _registry = ''
@@ -23,11 +13,16 @@ try:
 except:
     _edu_points = ''
 
-signatory_descriptions = ['Kierownik Naukowy', 'Organizator']
+try:
+    _instructor = instructorName
+except:
+    _instructor = ''
 %>
 
 <style>
     :root {
+        --teal-primary: #1a9b9c;
+        --teal-dark: #148586;
         --text-dark: #1d1d1b;
         --text-grey: #4a4a4a;
         --bg-white: #ffffff;
@@ -44,254 +39,234 @@ signatory_descriptions = ['Kierownik Naukowy', 'Organizator']
 
     .accomplishment-main {
         font-family: var(--font-main) !important;
-        background-color: #f0f0f0 !important;
+        background-color: #f5f5f5 !important;
         color: var(--text-dark);
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 20px;
+        padding: 40px 20px;
+        min-height: 100vh;
     }
 
-    /* A4 Container Layout */
-    .page {
+    /* A4 Portrait Container */
+    .certificate-page {
         width: 100%;
-        max-width: 1123px; /* A4 landscape width */
-        aspect-ratio: 297/210; /* A4 Landscape ratio */
+        max-width: 794px; /* A4 portrait width at 96dpi */
+        aspect-ratio: 210/297; /* A4 Portrait ratio */
         background: var(--bg-white);
         position: relative;
-        margin-bottom: 40px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.15);
         overflow: hidden;
-        padding: 40px;
+        padding: 60px 80px;
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
     }
 
-    /* --- Decorative Background Elements (SVG) --- */
-    .decorations {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 1;
-    }
-
-    .blob-corner-top {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 35%;
-        height: auto;
-    }
-
-    .blob-corner-bottom {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 30%;
-        height: auto;
-    }
-
-    /* Inner Border Frame */
-    .frame-border {
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        right: 20px;
-        bottom: 20px;
-        border: 1px solid #e0e0e0;
-        border-radius: 4px;
-        z-index: 2;
-        pointer-events: none;
-    }
-
-    /* Subtle horizontal lines pattern background */
-    .page::before {
+    /* Background with SVG border frame */
+    .certificate-page::before {
         content: "";
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-image: repeating-linear-gradient(0deg, transparent, transparent 9px, #f9f9f9 10px);
-        z-index: 0;
+        background-image: url("${static.url('certificates/tlo.svg')}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        opacity: 1;
+        z-index: 1;
     }
 
-    /* Floating Shapes (Confetti) - Positioning */
-    .shape {
-        position: absolute;
-        z-index: 2;
-        overflow: visible;
-    }
-
-    /* Positioning specific shapes based on design */
-    .s-1 { top: 6%; left: 8%; width: 30px; height: 30px; } /* Circle top left */
-    .s-2 { top: 8%; left: 35%; width: 25px; height: 25px; } /* Square top center */
-    .s-3 { top: 10%; left: 62%; width: 30px; height: 30px; } /* Triangle top center */
-    .s-4 { top: 35%; left: 5%; width: 100px; height: 30px; } /* Zigzag left */
-    .s-5 { top: 50%; left: 5%; width: 25px; height: 25px; } /* Square left */
-    .s-6 { top: 40%; right: 12%; width: 30px; height: 30px; } /* Circle right */
-    .s-7 { top: 52%; right: 5%; width: 80px; height: 30px; } /* Zigzag right */
-
-
-    /* --- Content Layer --- */
+    /* Content Layer */
     .content-wrapper {
         position: relative;
         z-index: 10;
-        height: 100%;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        height: 100%;
+    }
+
+    /* Header Section */
+    .certificate-header {
         text-align: center;
-        padding: 2% 5%;
+        margin-bottom: 30px;
+        margin-top: 80px;
     }
 
-    /* Page 1 Specifics */
-    .date-top {
-        font-size: 0.9rem;
-        margin-top: 40px;
-        margin-bottom: 20px;
-        color: var(--text-dark);
-    }
-
-    h1.cert-title {
+    .cert-title {
         font-size: 3.5rem;
-        font-weight: 800;
-        margin-bottom: 10px;
-        letter-spacing: 2px;
+        font-weight: 700;
+        color: var(--teal-primary);
+        letter-spacing: 3px;
         text-transform: uppercase;
-        color: #111;
+        line-height: 1;
+        margin-bottom: 5px;
     }
 
     .cert-subtitle {
-        font-size: 1.4rem;
+        font-size: 1.6rem;
         font-weight: 400;
-        margin-bottom: 5px;
+        color: var(--teal-primary);
+        letter-spacing: 2px;
         text-transform: uppercase;
     }
 
-    .cert-topic {
-        font-size: 1.5rem;
-        font-weight: 500;
+    /* Course Section */
+    .course-section {
+        text-align: center;
         margin-bottom: 40px;
     }
 
-    .attendee-name {
-        font-size: 3rem;
-        font-weight: 400;
-        text-transform: uppercase;
-        margin-bottom: 5px;
+    .course-label {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--text-dark);
         letter-spacing: 1px;
+        margin-bottom: 15px;
     }
 
-    .attendee-number {
-        font-size: 1rem;
-        color: var(--text-grey);
+    .course-name {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        line-height: 1.4;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    /* Participant Section */
+    .participant-section {
+        text-align: center;
         margin-bottom: 30px;
     }
 
-    .legal-text {
-        font-size: 0.85rem;
-        line-height: 1.5;
-        max-width: 85%;
-        margin: 0 auto 50px auto;
-        color: #333;
-    }
-
-    .footer-section {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-        margin-bottom: 20px;
-        position: relative;
-        padding: 0 50px;
-    }
-
-    .signature-block {
-        text-align: center;
-        width: 35%;
-    }
-
-    .sig-title {
-        font-size: 0.8rem;
-        color: var(--text-grey);
+    .participant-name {
+        font-size: 2.8rem;
+        font-weight: 700;
+        color: var(--teal-primary);
+        letter-spacing: 2px;
         margin-bottom: 10px;
     }
 
-    .sig-img {
-        height: 50px;
+    .participant-underline {
+        width: 500px;
+        height: 2px;
+        background-color: var(--teal-primary);
+        margin: 0 auto 30px auto;
+    }
+
+    .participant-underline-thick {
+        width: 600px;
+        height: 4px;
+        background-color: var(--teal-primary);
+        margin: 0 auto 5px auto;
+    }
+
+    /* License Section */
+    .license-section {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .license-label {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--teal-primary);
+        letter-spacing: 1px;
+        margin-bottom: 15px;
+    }
+
+    .license-text {
+        font-size: 0.75rem;
+        line-height: 1.6;
+        color: var(--text-dark);
+        max-width: 580px;
+        margin: 0 auto;
+    }
+
+    /* Footer Section */
+    .certificate-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-top: auto;
+        padding-top: 40px;
+    }
+
+    .footer-block {
+        flex: 1;
+        text-align: center;
+    }
+
+    .footer-label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 8px;
+    }
+
+    .footer-content {
+        margin-top: 10px;
+    }
+
+    .instructor-name {
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--text-dark);
+        border-top: 1px solid #ccc;
+        padding-top: 8px;
+        display: inline-block;
+        min-width: 200px;
+    }
+
+    .organizer-logo {
+        font-weight: 700;
+        font-size: 0.8rem;
         margin-bottom: 5px;
-        font-family: 'Cursive', serif;
-        font-size: 1.5rem;
-        color: #555;
+    }
+
+    .signature-img {
+        height: 50px;
+        margin: 5px 0;
         display: flex;
         align-items: center;
         justify-content: center;
+        margin-botton: 10px;
     }
 
-    .sig-name {
-        font-size: 0.9rem;
-        border-top: 1px solid #ccc;
-        padding-top: 5px;
-        font-weight: 500;
+    .signature-img img {
+        max-height: 50px;
+        max-width: 180px;
     }
 
-    /* Page 2 Specifics (Agenda) */
-    .agenda-header {
-        margin-top: 100px;
-        font-size: 1.2rem;
-        letter-spacing: 4px;
-        text-transform: uppercase;
-        margin-bottom: 50px;
-        font-weight: 600;
-    }
-
-    .agenda-list {
-        list-style: none;
-        max-width: 90%;
-        margin: 0 auto;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-    }
-
-    .agenda-item h3 {
-        font-size: 1.1rem;
-        font-weight: 700;
-        margin-bottom: 5px;
-        color: #000;
-    }
-
-    .agenda-item p {
-        font-size: 1rem;
+    .organizer-name {
+        font-size: 0.85rem;
         font-weight: 400;
-        color: #333;
-    }
-
-    /* Global SVG Styles */
-    .grad-stroke {
-        fill: none;
-        stroke-width: 2;
-        stroke-linecap: round;
-        stroke-linejoin: round;
+        color: var(--text-dark);
+        margin-top: 5px;
+        border-top: 1px solid #ccc;
+        padding-top: 8px;
     }
 
     /* Responsive Scaling */
     @media (max-width: 800px) {
-        .page {
-            height: auto;
+        .certificate-page {
             aspect-ratio: auto;
-            padding-bottom: 60px;
+            padding: 40px;
         }
-        h1.cert-title { font-size: 2rem; }
-        .cert-subtitle, .cert-topic { font-size: 1rem; }
-        .attendee-name { font-size: 1.8rem; }
-        .footer-section { flex-direction: column; gap: 30px; align-items: center; padding: 0; }
-        .signature-block { width: 80%; }
-        .blob-corner-bottom { width: 50%; }
+        .cert-title { font-size: 2.5rem; }
+        .cert-subtitle { font-size: 1.2rem; }
+        .course-name { font-size: 1.1rem; }
+        .participant-name { font-size: 2rem; }
+        .participant-underline { width: 300px; }
+        .certificate-footer {
+            flex-direction: column;
+            gap: 30px;
+        }
     }
 
     /* Print Styles */
@@ -302,118 +277,97 @@ signatory_descriptions = ['Kierownik Naukowy', 'Organizator']
             -webkit-print-color-adjust: exact;
             print-color-adjust: exact;
         }
-        .page {
+        .certificate-page {
             margin: 0;
             box-shadow: none;
-            page-break-after: always;
-            width: 100%;
-            height: 100vh;
+            width: 210mm;
+            height: 297mm;
+            max-width: none;
         }
     }
 </style>
 
-<!-- GLOBAL SVG DEFINITIONS (Hidden) -->
-<!-- Defines the gradient used by all orange elements -->
-<svg width="0" height="0" style="position: absolute;">
-    <defs>
-        <linearGradient id="orangeGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-            <stop offset="0%" style="stop-color:#F37021;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#FFAF7B;stop-opacity:1" />
-        </linearGradient>
-    </defs>
-</svg>
-
 <main class="accomplishment accomplishment-main">
+    <div class="certificate-page">
+        <div class="content-wrapper">
+            <!-- Header -->
+            <div class="certificate-header">
+                <h1 class="cert-title">CERTYFIKAT</h1>
+                <div class="cert-subtitle">UCZESTNICTWA</div>
+            </div>
 
-<!-- PAGE 1: CERTIFICATE -->
-<div class="page">
-    <div class="frame-border"></div>
+            <!-- Course Info -->
+            <div class="course-section">
+                <div class="course-label">W KURSIE E-LEARNINGOWYM:</div>
+                <div class="course-name">${accomplishment_copy_course_name}</div>
+            </div>
 
-    <div class="decorations">
-        <!-- Top Right Blob (Wavy) with Gradient -->
-        <svg class="blob-corner-top" viewBox="0 0 400 300" preserveAspectRatio="none">
-            <path d="M0,0 L400,0 L400,300 C300,250 200,280 150,150 C100,50 50,20 0,0 Z" fill="url(#orangeGrad)" />
-        </svg>
+            <!-- Participant Name -->
+            <div class="participant-section">
+                <div class="participant-name">${accomplishment_copy_name}</div>
+                <div class="participant-underline-thick"></div>
+                <div class="participant-underline"></div>
+            </div>
 
-        <!-- Bottom Left Blob (Wavy) with Gradient -->
-        <svg class="blob-corner-bottom" viewBox="0 0 300 300" preserveAspectRatio="none">
-            <path d="M0,0 C 50,120 120,180 300,300 L 0,300 Z" fill="url(#orangeGrad)" />
-        </svg>
-    </div>
-
-    <div class="content-wrapper">
-        <div class="date-top">${certificate_date_issued}</div>
-        <div>
-            <h1 class="cert-title">Certyfikat Uczestnictwa</h1>
-            <div class="cert-subtitle">W KURSIE ${accomplishment_copy_course_org}:</div>
-            <div class="cert-topic">${accomplishment_copy_course_name}</div>
-        </div>
-        <div>
-            <div class="attendee-name">${accomplishment_copy_name}</div>
-            <div class="attendee-number">${_("Numer certyfikatu")}: ${certificate_id_number}</div>
-        </div>
-        <div class="legal-text">
-            % if _registry:
-            Numer wpisu do rejestru podmiotów prowadzących kształcenie Okręgowej Rady Lekarskiej w Warszawie ${_registry}. Na podstawie Rozporządzenia Ministra Zdrowia z dnia 21 lutego 2022 r. w sprawie sposobu dopełnienia obowiązku doskonalenia zawodowego lekarzy i lekarzy dentystów oraz udokumentowanej liczby godzin uczestnictwa w kongresie lekarzowi przysługują <strong>${_edu_points}</strong>.
-            % else:
-            ${accomplishment_copy_course_description}
-            % endif
-        </div>
-        <div class="footer-section">
-<!--            % if _scientific:-->
-<!--            <div class="signature-block">-->
-<!--                <div class="sig-title">Kierownik naukowy konferencji:</div>-->
-<!--                <div class="sig-img"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iNTAiPjxwYXRoIGQ9Ik0xMCw0MCBDMzAsMTAgNjAsNjAgODAsMzAgTTEwMCw0MCBDMTIwLDIwIDE0MCw1MCAxOTAsMzAiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsPSJub25lIi8+PC9zdmc+" alt="Podpis" style="height: 40px;"></div>-->
-<!--                <div class="sig-name">${_scientific}</div>-->
-<!--            </div>-->
-<!--            % endif-->
-            % if certificate_data:
-                % for signatory in certificate_data.get('signatories', []):
-                    % if signatory.get('signature_image_path'):
-                        <div class="signature-block">
-                            <div class="sig-title">Organizator:</div>
-                            <div style="font-weight: 700; font-size: 0.8rem; margin-bottom:5px;">${signatory['organization']}</div>
-                            <div class="sig-img"><img src="${static.url(signatory['signature_image_path'])}" alt="${signatory['name']}" style="height: 40px;"></div>
-                            <div class="sig-name">${signatory['title']} ${signatory['name']}</div>
-                        </div>
+            <!-- License/Registry Info -->
+            <div class="license-section">
+                <div class="license-label">NR PRAWA WYKONYWANIA ZAWODU:</div>
+                <div class="license-text">
+                    % if _registry:
+                    Numer wpisu do rejestru podmiotów prowadzących kształcenie Okręgowej Rady Lekarskiej w Warszawie ${_registry}. Na podstawie Rozporządzenia Ministra Zdrowia z dnia 21 lutego 2022 r. w sprawie sposobu dopełnienia obowiązku doskonalenia zawodowego lekarzy i lekarzy dentystów oraz udokumentowanej liczby godzin uczestnictwa w kursie lekarzowi przysługują ${_edu_points} punkty edukacyjne
+                    % else:
+                    ${accomplishment_copy_course_description}
                     % endif
-                % endfor
-            % endif
+                </div>
+            </div>
+
+            <!-- Footer with Signatures -->
+            <div class="certificate-footer">
+                <div class="footer-block">
+                    <div class="footer-label">PROWADZĄCY:</div>
+                    <div class="footer-content">
+                        % if _instructor:
+                             <div class="instructor-name">${_instructor}</div>
+                        % elif certificate_data and certificate_data.get('signatories'):
+                            <%
+                            signatory = certificate_data.get('signatories', [])[0] if certificate_data.get('signatories') else None
+                            %>
+                        <div class="signature-img">
+                            <img src="${static.url(signatory['signature_image_path'])}" alt="${signatory.get('name', '')}">
+                        </div>
+                        <div class="instructor-name">${certificate_data['signatories'][0].get('name', '')}</div>
+
+                        % else:
+                             <div class="instructor-name">${accomplishment_copy_course_org}</div>
+                        % endif
+                    </div>
+                </div>
+
+                <div class="footer-block">
+                    <div class="footer-label">ORGANIZATOR:</div>
+                    <div class="footer-content">
+                        % if certificate_data and certificate_data.get('signatories'):
+                            <% 
+                            signatory = certificate_data.get('signatories', [])[1] if certificate_data.get('signatories') else None
+                            %>
+                            % if signatory:
+                                <div class="signature-img">
+                                    <img src="${static.url('certificates/logo.svg')}" alt="${signatory.get('name', '')}">
+                                </div>
+                                % if signatory.get('signature_image_path'):
+                                <div class="signature-img">
+                                    <img src="${static.url(signatory['signature_image_path'])}" alt="${signatory.get('name', '')}">
+                                </div>
+                                % endif
+                                <div class="organizer-name">${signatory.get('title', '')} ${signatory.get('name', '')}</div>
+                            % endif
+                        % else:
+                        <div class="organizer-logo">MEDICAL TRIBUNE POLSKA</div>
+                        <div class="organizer-name">${accomplishment_copy_course_org}</div>
+                        % endif
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-
-<!-- PAGE 2: AGENDA (tylko gdy są dane agendy) -->
-<div class="page">
-    <div class="frame-border"></div>
-
-    <div class="decorations">
-        <svg class="blob-corner-top" viewBox="0 0 400 300" preserveAspectRatio="none">
-            <path d="M0,0 L400,0 L400,300 C300,250 200,280 150,150 C100,50 50,20 0,0 Z" fill="url(#orangeGrad)" />
-        </svg>
-
-        <svg class="blob-corner-bottom" viewBox="0 0 300 300" preserveAspectRatio="none">
-            <path d="M0,0 C 50,120 120,180 300,300 L 0,300 Z" fill="url(#orangeGrad)" />
-        </svg>
-    </div>
-
-    <div class="content-wrapper">
-        <div class="agenda-header">Agenda</div>
-        <ul class="agenda-list">
-            % if _agenda:
-                % for item in _agenda:
-                <li class="agenda-item">
-                    <h3>${item['title']}</h3>
-                    <p>– ${item['speaker']}</p>
-                </li>
-                % endfor
-            % else:
-            <li class="agenda-item">
-                <p>${_("Brak danych agendy - uzupełnij w ustawieniach zaawansowanych kursu")}</p>
-            </li>
-            % endif
-        </ul>
-    </div>
-</div>
-
 </main>
