@@ -1,5 +1,7 @@
 <!-- html2canvas dla konwersji certyfikatu do obrazka -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<!-- jsPDF dla zapisu do PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script type="text/javascript">
 
@@ -14,7 +16,7 @@
        
        // Pokaż komunikat ładowania
        printBtn.disabled = true;
-       printBtn.innerHTML = '<span class="icon fa fa-spinner fa-spin" aria-hidden="true"></span> Przygotowywanie...';
+       printBtn.innerHTML = '<span class="icon fa fa-spinner fa-spin" aria-hidden="true"></span> Generowanie PDF...';
        
        // Znajdź certyfikat
        var certificate = document.querySelector('.certificate-page');
@@ -38,38 +40,41 @@
            windowWidth: Math.max(certificate.scrollWidth, 850),
            windowHeight: certificate.scrollHeight
        }).then(function(canvas) {
-           // Zapisz obecną zawartość body
-           var originalBody = document.body.innerHTML;
-           var originalOverflow = document.body.style.overflow;
+           // Utwórz PDF z canvas
+           var imgData = canvas.toDataURL('image/png');
+           var imgWidth = canvas.width;
+           var imgHeight = canvas.height;
            
-           // Dodaj style dla druku
-           var printStyles = '<style>@page { size: A4 portrait; margin: 0; } body { margin: 0; padding: 0; } img { width: 100%; height: auto; max-height: 100vh; object-fit: contain; }</style>';
+           // A4 w mm
+           var pdfWidth = 210;
+           var pdfHeight = 297;
            
-           // Zastąp zawartość obrazkiem
-           document.body.innerHTML = printStyles + '<img id="print-certificate-image" src="' + canvas.toDataURL('image/png') + '" />';
-           document.body.style.overflow = 'hidden';
+           // Oblicz proporcje
+           var ratio = Math.min(pdfWidth / (imgWidth * 0.264583), pdfHeight / (imgHeight * 0.264583));
+           var scaledWidth = (imgWidth * 0.264583) * ratio;
+           var scaledHeight = (imgHeight * 0.264583) * ratio;
+           
+           // Wyśrodkuj na stronie
+           var xOffset = (pdfWidth - scaledWidth) / 2;
+           var yOffset = (pdfHeight - scaledHeight) / 2;
+           
+           // Utwórz PDF
+           const { jsPDF } = window.jspdf;
+           var pdf = new jsPDF({
+               orientation: 'portrait',
+               unit: 'mm',
+               format: 'a4'
+           });
+           
+           pdf.addImage(imgData, 'PNG', xOffset, yOffset, scaledWidth, scaledHeight);
+           
+           // Zapisz PDF
+           var fileName = 'certyfikat_' + new Date().getTime() + '.pdf';
+           pdf.save(fileName);
            
            // Przywróć przycisk
            printBtn.disabled = false;
            printBtn.innerHTML = originalHTML;
-           
-           // Drukuj
-           setTimeout(function() {
-               window.print();
-               
-               // Po wydrukowaniu przywróć oryginalną zawartość
-               // Używamy setTimeout aby poczekać na zamknięcie okna drukowania
-               setTimeout(function() {
-                   document.body.innerHTML = originalBody;
-                   document.body.style.overflow = originalOverflow;
-                   
-                   // Ponownie dodaj event listener do przycisku
-                   var newPrintBtn = document.getElementById("action-print-view");
-                   if (newPrintBtn) {
-                       newPrintBtn.addEventListener("click", printView);
-                   }
-               }, 100);
-           }, 300);
            
        }).catch(function(error) {
            console.error('Błąd konwersji do obrazka:', error);
