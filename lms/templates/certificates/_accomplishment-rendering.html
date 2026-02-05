@@ -266,13 +266,26 @@ except:
         margin-bottom: 5px;
     }
 
+    .logo-img {
+        margin: 5px 0;
+        max-width: 317px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .logo-img-image {
+        max-width: 100%;
+    }
+
     .signature-img {
         height: 50px;
         margin: 5px 0;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-botton: 10px;
+        margin-bottom: 10px;
     }
 
     .signature-img img {
@@ -308,18 +321,86 @@ except:
 
     /* Print Styles */
     @media print {
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+        
         .accomplishment-main {
             background: none !important;
             padding: 0;
+            margin: 0;
+            min-height: auto;
             -webkit-print-color-adjust: exact;
             print-color-adjust: exact;
         }
+        
         .certificate-page {
             margin: 0;
+            padding: 8px 15px !important;
             box-shadow: none;
-            width: 210mm;
-            height: 297mm;
+            width: 210mm !important;
+            height: 297mm !important;
             max-width: none;
+            page-break-inside: avoid;
+            page-break-after: avoid;
+            transform: scale(0.90);
+            transform-origin: top center;
+        }
+        
+        .cert-title {
+            font-size: 3.2rem !important;
+        }
+        
+        .cert-subtitle {
+            font-size: 1.45rem !important;
+        }
+        
+        .license-text {
+            font-size: 0.68rem !important;
+            line-height: 1.5 !important;
+        }
+        
+        .footer-label {
+            font-size: 0.55rem !important;
+        }
+        
+        .instructor-name, .organizer-name {
+            font-size: 0.65rem !important;
+        }
+        
+        /* Zmniejsz odstępy między sekcjami TYLKO dla druku */
+        .certificate-header {
+            margin-bottom: 15px !important;
+            margin-top: 50px !important;
+        }
+        
+        .course-section {
+            margin-bottom: 25px !important;
+        }
+        
+        .participant-section {
+            margin-bottom: 15px !important;
+        }
+        
+        .license-section {
+            margin-bottom: 20px !important;
+        }
+        
+        .certificate-footer {
+            padding-top: 15px !important;
+            margin-top: 0 !important;
+            flex-direction: row !important;
+            gap: 0 !important;
+            display: flex !important;
+        }
+        
+        .footer-block {
+            flex: 1 !important;
+        }
+        
+        .footer-content {
+            margin-top: 5px !important;
         }
     }
 </style>
@@ -388,8 +469,8 @@ except:
                             signatory = certificate_data.get('signatories', [])[1] if certificate_data.get('signatories') else None
                             %>
                             % if signatory:
-                                <div class="signature-img">
-                                    <img src="${static.url('certificates/logo.svg')}" alt="${signatory.get('name', '')}">
+                                <div class="logo-img">
+                                    <img class="logo-img-image" src="${static.url('certificates/logo.png')}" alt="${signatory.get('name', '')}">
                                 </div>
                                 % if signatory.get('signature_image_path'):
                                 <div class="signature-img">

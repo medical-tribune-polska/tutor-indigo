@@ -1,0 +1,82 @@
+<!-- html2canvas dla konwersji certyfikatu do obrazka -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script type="text/javascript">
+
+    document.getElementById("action-print-view").addEventListener("click", printView);
+
+    function printView(event) {
+       event.preventDefault();
+       
+       // Znajdź przycisk
+       var printBtn = document.getElementById("action-print-view");
+       var originalHTML = printBtn.innerHTML;
+       
+       // Pokaż komunikat ładowania
+       printBtn.disabled = true;
+       printBtn.innerHTML = '<span class="icon fa fa-spinner fa-spin" aria-hidden="true"></span> Przygotowywanie...';
+       
+       // Znajdź certyfikat
+       var certificate = document.querySelector('.certificate-page');
+       
+       if (!certificate) {
+           console.error('Nie znaleziono certyfikatu');
+           window.print();
+           printBtn.disabled = false;
+           printBtn.innerHTML = originalHTML;
+           return;
+       }
+       
+       // Konwertuj na obraz z szerokością > 800px żeby uniknąć responsive breakpoint
+       html2canvas(certificate, {
+           scale: 2,
+           useCORS: true,
+           allowTaint: false,
+           backgroundColor: '#ffffff',
+           width: Math.max(certificate.offsetWidth, 850),
+           height: certificate.offsetHeight,
+           windowWidth: Math.max(certificate.scrollWidth, 850),
+           windowHeight: certificate.scrollHeight
+       }).then(function(canvas) {
+           // Zapisz obecną zawartość body
+           var originalBody = document.body.innerHTML;
+           var originalOverflow = document.body.style.overflow;
+           
+           // Dodaj style dla druku
+           var printStyles = '<style>@page { size: A4 portrait; margin: 0; } body { margin: 0; padding: 0; } img { width: 100%; height: auto; max-height: 100vh; object-fit: contain; }</style>';
+           
+           // Zastąp zawartość obrazkiem
+           document.body.innerHTML = printStyles + '<img id="print-certificate-image" src="' + canvas.toDataURL('image/png') + '" />';
+           document.body.style.overflow = 'hidden';
+           
+           // Przywróć przycisk
+           printBtn.disabled = false;
+           printBtn.innerHTML = originalHTML;
+           
+           // Drukuj
+           setTimeout(function() {
+               window.print();
+               
+               // Po wydrukowaniu przywróć oryginalną zawartość
+               // Używamy setTimeout aby poczekać na zamknięcie okna drukowania
+               setTimeout(function() {
+                   document.body.innerHTML = originalBody;
+                   document.body.style.overflow = originalOverflow;
+                   
+                   // Ponownie dodaj event listener do przycisku
+                   var newPrintBtn = document.getElementById("action-print-view");
+                   if (newPrintBtn) {
+                       newPrintBtn.addEventListener("click", printView);
+                   }
+               }, 100);
+           }, 300);
+           
+       }).catch(function(error) {
+           console.error('Błąd konwersji do obrazka:', error);
+           // Fallback do standardowego drukowania
+           alert('Wystąpił błąd przy przygotowaniu certyfikatu. Użyj standardowego drukowania przeglądarki.');
+           printBtn.disabled = false;
+           printBtn.innerHTML = originalHTML;
+       });
+    }
+</script>
