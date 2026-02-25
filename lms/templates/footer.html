@@ -28,20 +28,20 @@
       ## through an API to partner sites (such as marketing sites or blogs),
       ## which are not technically powered by OpenEdX.
       % if not hide_openedx_link:
-      <ul class="logo-list">
-        <li>Powered by:</li>
-        <li>
-          <a href="https://docs.tutor.edly.io" rel="noopener" target="_blank">
-            <img src="${static.url('images/tutor-logo.png')}" alt="Runs on Tutor" width="57" />
-          </a>
-        </li>
-        <li>
-          <a href="${footer['openedx_link']['url']}" rel="noopener" target="_blank">
-            <img src="${static.url('images/openedx-logo.png')}" alt="${footer['openedx_link']['title']}" width="79" />
-          </a>
-        </li>
-      </ul>
-    </div>
+        <ul class="logo-list">
+          <li>Powered by:</li>
+          <li>
+            <a href="https://docs.tutor.edly.io" rel="noopener" target="_blank">
+              <img src="${static.url('images/tutor-logo.png')}" alt="Runs on Tutor" width="57" />
+            </a>
+          </li>
+          <li>
+            <a href="${footer['openedx_link']['url']}" rel="noopener" target="_blank">
+              <img src="${static.url('images/openedx-logo.png')}" alt="${footer['openedx_link']['title']}" width="79" />
+            </a>
+          </li>
+        </ul>
+      </div>
     
     <nav class="nav-colophon" aria-label="${_('About')}">
       <ol>
@@ -78,7 +78,15 @@
     </nav>
     
   </div>
-  <span class="copyright-site">Copyrights ©${datetime.now().year}. All Rights Reserved.</span>
+  <div class="copyright-site-wrapper">
+    <span class="copyright-site">Copyrights ©${datetime.now().year}. All Rights Reserved.</span>
+    <span class="partner-info">
+      Partner serwisu: 
+      <a href="https://podyplomie.pl" rel="noopener" target="_blank">
+        <img src="${static.url('images/podyplomie-logo.png')}" alt="Podyplomie.pl" style="height: 16px; vertical-align: middle; margin-left: 5px;" />
+      </a>
+    </span>
+  </div>
   % endif
     <div class="colophon">
 
@@ -169,7 +177,15 @@
       </div>
       
     </div>
-    <span class="copyright-site">Copyrights © ${datetime.now().year} Edumedo Online. Wszelkie prawa zastrzeżone.</span>
+    <div class="copyright-site-wrapper">
+      <span class="copyright-site">Copyrights © ${datetime.now().year} Edumedo Online. Wszelkie prawa zastrzeżone.</span>
+      <span class="partner-info">
+        Partner serwisu: 
+        <a href="https://podyplomie.pl" rel="noopener" target="_blank">
+          <img src="${static.url('images/podyplomie-logo.png')}" alt="Podyplomie.pl" style="height: 16px; vertical-align: middle; margin-left: 5px;" />
+        </a>
+      </span>
+    </div>
     % endif
       <div class="colophon">
 

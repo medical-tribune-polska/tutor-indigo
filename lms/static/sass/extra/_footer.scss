@@ -108,6 +108,24 @@ footer.tutor-container {
         line-height: 24px;
         color: $copyright-font-color;
     }
+    .copyright-site-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .partner-info {
+        font-size: 14px;
+        line-height: 24px;
+        color: $copyright-font-color;
+        display: flex;
+        align-items: center;
+        a {
+            display: inline-flex;
+            align-items: center;
+        }
+    }
 }
 
 body.indigo-dark-theme {
@@ -139,6 +157,9 @@ body.indigo-dark-theme {
             }
         }
         .copyright-site {
+            color: $text-color-primary;
+        }
+        .partner-info {
             color: $text-color-primary;
         }
 
