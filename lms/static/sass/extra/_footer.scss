@@ -20,10 +20,11 @@ footer.tutor-container {
     .footer-top {
         display: flex !important;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
         border-bottom: 1px solid $bottom-footer-border-color;
         margin: 0 0 15px;
         padding-bottom: 20px;
+        position: relative;
         &:after {
             clear: both;
 //             display: block;
@@ -41,6 +42,8 @@ footer.tutor-container {
 
         .footer-left-logo {
             width: 150px;
+            position: absolute;
+            left: 0;
         }
     }
     .logo-list {
