@@ -27,12 +27,8 @@ except:
         --text-grey: #4a4a4a;
         --bg-white: #ffffff;
         --font-main: 'Switzer', sans-serif;
-        --font-title: 'Cinzel', serif;
     }
 
-    /* Cinzel - dla nagłówka CERTYFIKAT */
-    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&display=swap');
-    
     /* Switzer - font główny */
     @font-face {
         font-family: 'Switzer';
@@ -130,24 +126,12 @@ except:
         margin-top: 160px;
     }
 
-    .cert-title {
-        font-family: var(--font-title);
-        font-size: 3.5rem;
-        font-weight: 700;
-        color: var(--teal-primary);
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        line-height: 1;
-        margin-bottom: 5px;
-    }
-
-    .cert-subtitle {
-        font-family: var(--font-title);
-        font-size: 1.6rem;
-        font-weight: 400;
-        color: var(--teal-primary);
-        letter-spacing: 2px;
-        text-transform: uppercase;
+    .cert-title-img {
+        display: block;
+        width: 100%;
+        max-width: 340px;
+        margin: 0 auto;
+        height: auto;
     }
 
     /* Course Section */
@@ -348,14 +332,6 @@ except:
             transform-origin: top center;
         }
         
-        .cert-title {
-            font-size: 3.2rem !important;
-        }
-        
-        .cert-subtitle {
-            font-size: 1.45rem !important;
-        }
-        
         .license-text {
             font-size: 0.68rem !important;
             line-height: 1.5 !important;
@@ -410,8 +386,7 @@ except:
         <div class="content-wrapper">
             <!-- Header -->
             <div class="certificate-header">
-                <h1 class="cert-title">CERTYFIKAT</h1>
-                <div class="cert-subtitle">UCZESTNICTWA</div>
+                <img class="cert-title-img" src="${static.url('certificates/certyfikat_naglowek.svg')}" alt="Certyfikat Uczestnictwa">
             </div>
 
             <!-- Course Info -->
