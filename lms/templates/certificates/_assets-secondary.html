@@ -29,17 +29,17 @@
            return;
        }
        
-       // Konwertuj na obraz z szerokością > 800px żeby uniknąć responsive breakpoint
+       // Wymuś szerokość >= 850px przed capture żeby uniknąć responsive breakpoint
+       var originalWidth = certificate.style.width;
+       certificate.style.width = Math.max(certificate.offsetWidth, 850) + 'px';
+
        html2canvas(certificate, {
            scale: 2,
            useCORS: true,
            allowTaint: false,
-           backgroundColor: '#ffffff',
-           width: Math.max(certificate.offsetWidth, 850),
-           height: certificate.offsetHeight,
-           windowWidth: Math.max(certificate.scrollWidth, 850),
-           windowHeight: certificate.scrollHeight
+           backgroundColor: '#ffffff'
        }).then(function(canvas) {
+           certificate.style.width = originalWidth;
            // Utwórz PDF z canvas
            var imgData = canvas.toDataURL('image/png');
            var imgWidth = canvas.width;
@@ -49,24 +49,15 @@
            var pdfWidth = 210;
            var pdfHeight = 297;
            
-           // Oblicz proporcje
-           var ratio = Math.min(pdfWidth / (imgWidth * 0.264583), pdfHeight / (imgHeight * 0.264583));
-           var scaledWidth = (imgWidth * 0.264583) * ratio;
-           var scaledHeight = (imgHeight * 0.264583) * ratio;
-           
-           // Wyśrodkuj na stronie
-           var xOffset = (pdfWidth - scaledWidth) / 2;
-           var yOffset = (pdfHeight - scaledHeight) / 2;
-           
-           // Utwórz PDF
+           // Utwórz PDF wypełniający całą stronę A4
            const { jsPDF } = window.jspdf;
            var pdf = new jsPDF({
                orientation: 'portrait',
                unit: 'mm',
                format: 'a4'
            });
-           
-           pdf.addImage(imgData, 'PNG', xOffset, yOffset, scaledWidth, scaledHeight);
+
+           pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
            
            // Zapisz PDF
            var fileName = 'certyfikat_' + new Date().getTime() + '.pdf';
@@ -77,8 +68,8 @@
            printBtn.innerHTML = originalHTML;
            
        }).catch(function(error) {
+           certificate.style.width = originalWidth;
            console.error('Błąd konwersji do obrazka:', error);
-           // Fallback do standardowego drukowania
            alert('Wystąpił błąd przy przygotowaniu certyfikatu. Użyj standardowego drukowania przeglądarki.');
            printBtn.disabled = false;
            printBtn.innerHTML = originalHTML;

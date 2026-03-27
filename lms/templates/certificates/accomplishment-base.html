@@ -31,25 +31,25 @@ course_mode_class = course_mode if course_mode else ''
     <%static:css group='style-certificates'/>
 
     <style>
-        /* Style TYLKO dla druku - NIE zmienia layoutu na ekranie */
         @media print {
-            /* Ukryj wszystko oprócz certyfikatu */
             .accomplishment-header,
             .wrapper-banner,
             .wrapper-about,
             .accomplishment-footer {
                 display: none !important;
             }
-            
-            /* Usuń marginesy body */
-            body, html {
+
+            html, body {
                 margin: 0 !important;
                 padding: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
             }
-            
+
             .wrapper-view {
                 margin: 0 !important;
                 padding: 0 !important;
+                width: 100% !important;
             }
         }
     </style>
