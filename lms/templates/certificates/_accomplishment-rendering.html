@@ -121,17 +121,18 @@ except:
 
     /* Header Section */
     .certificate-header {
-        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         margin-bottom: 30px;
         margin-top: 160px;
     }
 
     .cert-title-img {
         display: block;
-        width: 100%;
-        max-width: 340px;
-        margin: 0 auto;
+        width: 340px;
         height: auto;
+        flex-shrink: 0;
     }
 
     /* Course Section */
@@ -396,7 +397,7 @@ except:
         <div class="content-wrapper">
             <!-- Header -->
             <div class="certificate-header">
-                <svg class="cert-title-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 323.149606 85.03937">
+                <svg class="cert-title-img" xmlns="http://www.w3.org/2000/svg" width="340" height="90" viewBox="0 0 323.149606 85.03937">
                   <style>.st0{fill:#1c8987;}</style>
                   <g>
                     <path class="st0" d="M.717137,26.210449C.717137,9.937012,14.110204,0,28.439305,0c5.18457,0,10.440918,1.080078,14.617188,3.240234l1.008301,8.568848c-3.384277-7.056641-9.792969-9.79248-15.625488-9.79248-9.072754,0-19.009766,6.840332-19.009766,24.193848s9.937012,24.482422,19.513672,24.482422c6.624512,0,11.737305-3.240234,15.985352-9.577148l-1.439941,7.993164c-4.17627,2.303711-9.648926,3.600586-15.049316,3.600586C14.110204,52.709473.717137,42.556152.717137,26.210449Z"/>
