@@ -42,8 +42,11 @@ footer.tutor-container {
 
         .footer-left-logo {
             width: 150px;
-            position: absolute;
-            left: 0;
+            left: 20px;
+            @media (min-width: 600px) {
+                position: absolute;
+                left: 15px;
+            }
         }
     }
     .logo-list {
