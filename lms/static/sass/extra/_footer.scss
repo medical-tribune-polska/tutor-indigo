@@ -42,11 +42,8 @@ footer.tutor-container {
 
         .footer-left-logo {
             width: 150px;
-            left: 20px;
-            @media (min-width: 600px) {
-                position: absolute;
-                left: 15px;
-            }
+            position: absolute;
+            left: 0;
         }
     }
     .logo-list {
@@ -130,6 +127,62 @@ footer.tutor-container {
         a {
             display: inline-flex;
             align-items: center;
+        }
+    }
+}
+
+// Widok mobilny footera
+@media only screen and (max-width: 500px) {
+    footer.tutor-container {
+        .footer-top {
+            flex-direction: column;
+            align-items: center;
+
+            .footer-left-logo {
+                position: static;
+                margin-bottom: 16px;
+            }
+        }
+
+        .nav-colophon {
+            ol {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 0;
+                margin: 0;
+
+                li {
+                    display: block;
+                    padding: 4px 0;
+                }
+            }
+        }
+
+        .copyright-site-wrapper {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .copyright-site {
+            width: 250px;
+        }
+
+        .partner-info {
+            order: -1;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 12px;
+
+            a {
+                margin-top: 8px;
+
+                img {
+                    height: 24px !important;
+                    margin-left: 0 !important;
+                }
+            }
         }
     }
 }
