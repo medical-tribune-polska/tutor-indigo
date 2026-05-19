@@ -56,6 +56,12 @@ from openedx.core.lib.courses import course_image_url
 
 <section class="course-info about container">
 
+  % if getattr(course, 'sponsored', False) and getattr(course, 'sponsor_banner_image', ''):
+  <div class="sponsor-banner">
+    <img src="${course_image_url(course, 'sponsor_banner_image')}" alt="${_('Sponsor banner')}" />
+  </div>
+  % endif
+
   <%block name="course_about_header">
   <!-- Course profile header is updated inclusive of course heading and course image. -->
   <header class="course-profile">
@@ -81,6 +87,9 @@ from openedx.core.lib.courses import course_image_url
             ${course.display_name_with_default}
           </h1>
           <span class="org">${course.display_org_with_default}</span>
+          % if getattr(course, 'sponsored', False):
+          <span class="sponsor-badge">${_("KURS BEZPŁATNY")}</span>
+          % endif
         </div>
       </div>
     </div>
@@ -106,6 +115,16 @@ from openedx.core.lib.courses import course_image_url
     <!-- NEW IN INDIGO sidebar is improved with better icons -->
 
     <div class="course-sidebar">
+      % if getattr(course, 'sponsored', False):
+      <div class="sponsor-card">
+        <p class="sponsor-card-label">${_("SPONSOR KURSU")}</p>
+        % if getattr(course, 'sponsor_logo_image', ''):
+        <div class="sponsor-card-logo">
+          <img src="${course_image_url(course, 'sponsor_logo_image')}" alt="${_('Sponsor logo')}" />
+        </div>
+        % endif
+      </div>
+      % endif
       <div class="course-summary">
         <h2>${_("Summary")}</h2>
         <%block name="course_about_important_dates">
