@@ -201,6 +201,45 @@ from common.djangoapps.pipeline_mako import render_require_js_path_overrides
   <!-- Crazy Egg -->
   <script type="text/javascript" src="//script.crazyegg.com/pages/scripts/0082/7390.js" async="async"></script>
   <!-- End Crazy Egg -->
+  <!-- SmartAdServer -->
+  <%
+    import json as _json
+    _sas_logged_in = 'true' if user.is_authenticated else 'false'
+    _sas_lekarz = 'false'
+    if user.is_authenticated:
+        try:
+            _profile = user.profile
+            if _profile.meta:
+                _meta = _json.loads(_profile.meta)
+                if _meta.get('npwz'):
+                    _sas_lekarz = 'true'
+        except Exception:
+            pass
+    _sas_url = request.build_absolute_uri()
+    _sas_path = request.path
+  %>
+  <script type="application/javascript" src="https://ced.sascdn.com/tag/3674/smart.js" async></script>
+  <script type="application/javascript">
+      var sas = sas || {};
+      sas.cmd = sas.cmd || [];
+      sas.cmd.push(
+          function() {
+              sas.setup({ networkid: 3674, domain: "https://www8.smartadserver.com", async: true });
+              sas.call("onecall", {
+                  siteId: 775419,
+                  pageId: 2204905,
+                  formats: [
+                  { id: 88913 }
+                  ,{ id: 88911 }
+                  ,{ id: 88908 }
+                  ,{ id: 88932 }
+                  ,{ id: 88928 }
+                  ],
+                  target: 'user_logged_in=${_sas_logged_in | n};specialization=;lekarz=${_sas_lekarz | n};url=${_sas_url | n};path=${_sas_path | n}'
+              });
+          });
+  </script>
+  <!-- End SmartAdServer -->
 </head>
 
 <body class="${static.dir_rtl()} <%block name='bodyclass'/> lang_${LANGUAGE_CODE}">
@@ -231,6 +270,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       ${next.body()}
       <%block name="bodyextra"/>
     </div>
+
+    <!-- SmartAdServer: above footer -->
+    <div class="d-none d-md-flex justify-content-center py-4">
+      <div id="sas_88913"></div>
+      <script type="application/javascript">
+          sas.cmd.push(function() { sas.render("88913"); });
+      </script>
+    </div>
+    <div class="d-md-none d-flex justify-content-center py-3">
+      <div id="sas_88932"></div>
+      <script type="application/javascript">
+          sas.cmd.push(function() { sas.render("88932"); });
+      </script>
+    </div>
+    <!-- End SmartAdServer: above footer -->
 
     % if not disable_footer:
         <%include file="${static.get_template_path('footer.html')}" />

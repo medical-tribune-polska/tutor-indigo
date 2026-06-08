@@ -125,6 +125,14 @@ from openedx.core.lib.courses import course_image_url
         % endif
       </div>
       % endif
+      <!-- SmartAdServer: course sidebar ad -->
+      <div class="text-center py-3">
+        <div id="sas_88911"></div>
+        <script type="application/javascript">
+            sas.cmd.push(function() { sas.render("88911"); });
+        </script>
+      </div>
+      <!-- End SmartAdServer -->
       <div class="course-summary">
         <h2>${_("Summary")}</h2>
         <%block name="course_about_important_dates">
