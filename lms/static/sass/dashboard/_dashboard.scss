@@ -675,6 +675,44 @@
         @include media-breakpoint-up(md) {
             width: 28.33% !important;
         }
+        @media (max-width: 575px) {
+            width: 100% !important;
+            margin: 0 0 16px !important;
+        }
+    }
+}
+
+// Mobile: dashboard (moje kursy) adjustments
+@media (max-width: 575px) {
+    .dashboard .window-wrap #content.content-wrapper,
+    .window-wrap #content.content-wrapper {
+        padding: 16px !important;
+    }
+    .dashboard .main-container .my-courses .listing-courses .course-item .course-container .course {
+        .wrapper-course-details {
+            .course-title {
+                font-size: 18px;
+                font-weight: 700;
+                line-height: 24px;
+            }
+            .course-info {
+                line-height: 18px;
+                .info-date-block-container {
+                    line-height: 18px;
+                }
+            }
+        }
+        .details .wrapper-course-image {
+            img {
+                width: 100%;
+                height: 180px;
+                object-fit: cover;
+                object-position: center;
+            }
+        }
+    }
+    .listing-courses {
+        margin: 0 !important;
     }
 }
 .modal.unenroll-modal {

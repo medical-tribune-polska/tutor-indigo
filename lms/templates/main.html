@@ -272,18 +272,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <!-- SmartAdServer: above footer -->
-    <div class="d-none d-md-flex justify-content-center py-4">
+    <div id="smart-ad-desktop" class="d-none d-md-flex justify-content-center" style="height:0;overflow:hidden">
       <div id="sas_88913"></div>
       <script type="application/javascript">
           sas.cmd.push(function() { sas.render("88913"); });
       </script>
     </div>
-    <div class="d-md-none d-flex justify-content-center py-3">
+    <div id="smart-ad-mobile" class="d-md-none d-flex justify-content-center" style="height:0;overflow:hidden">
       <div id="sas_88932"></div>
       <script type="application/javascript">
           sas.cmd.push(function() { sas.render("88932"); });
       </script>
     </div>
+    <script type="application/javascript">
+      (function() {
+        ['smart-ad-desktop', 'smart-ad-mobile'].forEach(function(id) {
+          var el = document.getElementById(id);
+          if (!el) return;
+          var obs = new MutationObserver(function() {
+            if (el.querySelector('iframe, img, [class*="sas_"]')) {
+              el.style.height = '';
+              el.style.overflow = '';
+              el.style.padding = '1rem 0';
+              obs.disconnect();
+            }
+          });
+          obs.observe(el, { childList: true, subtree: true });
+        });
+      })();
+    </script>
     <!-- End SmartAdServer: above footer -->
 
     % if not disable_footer:

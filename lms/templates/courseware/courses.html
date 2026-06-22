@@ -3,10 +3,25 @@
   import json
   from django.utils.translation import gettext as _
   from openedx.core.djangolib.js_utils import js_escaped_string, dump_js_escaped_json
+  from openedx.core.lib.courses import course_image_url
+  from xmodule.modulestore.django import modulestore
 %>
 <%inherit file="../main.html" />
 <%
   course_discovery_enabled = settings.FEATURES.get('ENABLE_COURSE_DISCOVERY')
+
+  # Pobierz dane sponsorskich kursów bezpośrednio z modulestore (nie z 'courses' bo przy discovery jest puste)
+  _sponsored_courses_data = {}
+  try:
+      _ms = modulestore()
+      for _full in _ms.get_courses():
+          if getattr(_full, 'sponsored', False):
+              _logo_url = ''
+              if getattr(_full, 'sponsor_logo_image', ''):
+                  _logo_url = course_image_url(_full, 'sponsor_logo_image')
+              _sponsored_courses_data[str(_full.id)] = {'logo': _logo_url}
+  except Exception:
+      pass
 %>
 
 <%namespace name='static' file='../static_content.html'/>
@@ -99,3 +114,63 @@
       </section>
     </section>
 </main>
+
+% if course_discovery_enabled:
+<script type="text/javascript">
+(function() {
+    var sponsoredCourses = ${json.dumps(_sponsored_courses_data) | n};
+
+    function injectSponsorFooter(cardEl) {
+        var courseId = '';
+        var link = cardEl.querySelector('a[href*="/courses/"]');
+        if (link) {
+            var match = link.getAttribute('href').match(/\/courses\/([^\/]+)\//);
+            if (match) courseId = match[1];
+        }
+        if (!courseId || !sponsoredCourses[courseId]) return;
+        if (cardEl.querySelector('.course-card-sponsor-footer')) return;
+
+        var dateDiv = cardEl.querySelector('.course-date');
+        if (!dateDiv) return;
+
+        var footer = document.createElement('div');
+        footer.className = 'course-card-sponsor-footer';
+
+        var badge = document.createElement('span');
+        badge.className = 'course-card-badge';
+        badge.textContent = 'KURS BEZPŁATNY';
+        footer.appendChild(badge);
+
+        var logoUrl = sponsoredCourses[courseId].logo;
+        if (logoUrl) {
+            var logo = document.createElement('img');
+            logo.className = 'course-card-sponsor-logo';
+            logo.src = logoUrl;
+            logo.alt = 'Sponsor';
+            footer.appendChild(logo);
+        }
+
+        dateDiv.appendChild(footer);
+    }
+
+    var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            mutation.addedNodes.forEach(function(node) {
+                if (node.nodeType === 1) {
+                    var cards = node.querySelectorAll ? node.querySelectorAll('.course') : [];
+                    cards.forEach(injectSponsorFooter);
+                    if (node.classList && node.classList.contains('course')) {
+                        injectSponsorFooter(node);
+                    }
+                }
+            });
+        });
+    });
+
+    var listing = document.querySelector('.courses-listing');
+    if (listing) {
+        observer.observe(listing, { childList: true, subtree: true });
+    }
+})();
+</script>
+% endif

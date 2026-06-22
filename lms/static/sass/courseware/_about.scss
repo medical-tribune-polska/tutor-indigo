@@ -411,6 +411,78 @@
             }
         }
     }
+
+    // Mobile: course about layout adjustments
+    @media (max-width: 767px) {
+        &.container {
+            padding-left: 16px !important;
+            padding-right: 16px !important;
+        }
+        header.course-profile {
+            .intro-inner-wrapper {
+                padding-bottom: 0;
+            }
+        }
+        .intro-inner-wrapper .profile-top {
+            display: flex;
+            flex-direction: column;
+            .info-profile {
+                order: 1;
+                padding: 0 0 16px;
+                h1 {
+                    font-size: 24px;
+                    line-height: 32px;
+                }
+                .org {
+                    font-size: 15px;
+                    font-weight: 400;
+                    line-height: 22px;
+                }
+            }
+            .media {
+                order: 2;
+                margin: 0;
+                max-width: none;
+                background: #fff;
+                border-radius: 8px 8px 0 0;
+                padding: 0;
+                box-shadow: 0px -4px 20px 1px rgba(0,0,0,0.08);
+                img {
+                    border-radius: 8px 8px 0 0;
+                    height: 200px;
+                    width: 100%;
+                    object-fit: cover;
+                }
+                .hero {
+                    &:after {
+                        display: none;
+                    }
+                }
+            }
+        }
+        .sponsor-banner {
+            margin: 0 0 16px;
+        }
+        .about-content {
+            margin-left: 0;
+            margin-right: 0;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0px 4px 20px 1px rgba(0,0,0,0.08);
+            flex-flow: column;
+            .details {
+                .inner-wrapper {
+                    padding: 0;
+                }
+                .about, .prerequisites, .course-staff, .faq {
+                    padding: 16px;
+                    margin: 0 0 16px;
+                }
+            }
+            .course-sidebar {
+                padding: 16px;
+            }
+        }
+    }
 }
 body.indigo-dark-theme {
     .course-info.about {

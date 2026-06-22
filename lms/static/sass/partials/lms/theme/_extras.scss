@@ -273,6 +273,47 @@ nav.wrapper-preview-menu {
     box-shadow: 0px 0px 20px 1px rgba(0,0,0,0.08);
 }
 
+// Mobile: help page adjustments
+@media (max-width: 767px) {
+    section.container.about {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+        h1 {
+            font-size: 24px;
+            line-height: 32px;
+        }
+    }
+    .main-help-about-container {
+        padding: 16px;
+        h2 {
+            font-size: 16px;
+        }
+        p {
+            font-size: 15px;
+        }
+    }
+    .bottom-help-left-container {
+        width: 100% !important;
+    }
+    .padded-bottom-help-text-container {
+        width: 100% !important;
+        padding-left: 0;
+        border-left: none;
+        margin-top: 16px;
+    }
+    .bottom-help-container {
+        padding: 16px !important;
+        .bottom-h2 {
+            font-size: 16px;
+            line-height: 22px;
+        }
+        .bottom-p {
+            font-size: 15px;
+            line-height: 22px;
+        }
+    }
+}
+
 .help-avatar-container {
     display: flex;
 }
@@ -330,14 +371,26 @@ nav.wrapper-preview-menu {
     margin-top: 100px;
 }
 
-.about-image-container {
-    min-width: 460px;
+.about-top-text {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
 }
 
-@media only screen and (max-width: 760px) {
-    .about-image-container {
-        display: none;
-    }
+.about-intro-text {
+    font-weight: 700 !important;
+    font-size: 22px !important;
+    line-height: 1.4 !important;
+    color: #1a1a1a !important;
+    padding: 0 !important;
+    margin: 0 0 20px !important;
+}
+
+.about-image-container {
+    position: relative;
+    min-width: 460px;
+    min-height: 450px;
 }
 
 .about_us_bg {
@@ -360,7 +413,43 @@ nav.wrapper-preview-menu {
     display: flex;
     width: 100%;
     justify-content: space-between;
-    min-height: 450px;
+    align-items: stretch;
+    gap: 40px;
+}
+
+@media only screen and (max-width: 1000px) {
+    .about-top-container {
+        flex-direction: column;
+    }
+
+    .about-intro-text {
+        font-size: 16px !important;
+    }
+
+    .about-image-container {
+        min-width: unset;
+        min-height: unset;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        height: 350px;
+    }
+
+    .about_us_bg {
+        width: 300px;
+        height: 300px;
+        margin: 10px auto 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .about_us_photo {
+        margin: 34px auto 0;
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 250px;
+    }
 }
 
 .separator {

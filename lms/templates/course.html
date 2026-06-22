@@ -3,8 +3,20 @@
 <%!
 from django.utils.translation import gettext as _
 from django.urls import reverse
+from openedx.core.lib.courses import course_image_url
+from xmodule.modulestore.django import modulestore
 %>
 <%page args="course" expression_filter="h"/>
+<%
+    # CourseOverview nie ma pól niestandardowych — pobierz pełny kurs z modulestore
+    try:
+        _full_course = modulestore().get_course(course.id)
+        _is_sponsored = getattr(_full_course, 'sponsored', False)
+        _sponsor_logo = getattr(_full_course, 'sponsor_logo_image', '')
+    except Exception:
+        _is_sponsored = False
+        _sponsor_logo = ''
+%>
 <article class="course" id="${course.id}" role="region" aria-label="${course.display_name_with_default}">
   <a href="${reverse('about_course', args=[str(course.id)])}">
     <header class="course-image">
@@ -32,13 +44,30 @@ from django.urls import reverse
           <div class="course-date" aria-hidden="true">
               <img class="calendar-icon" width="14" src="${static.url('images/calendar.png')}" />
               ${_("Starts")}: ${course.advertised_start}
+              % if _is_sponsored:
+              <div class="course-card-sponsor-footer">
+                <span class="course-card-badge">${_("KURS BEZPŁATNY")}</span>
+                % if _sponsor_logo:
+                <img class="course-card-sponsor-logo" src="${course_image_url(_full_course, 'sponsor_logo_image')}" alt="${_('Sponsor')}" />
+                % endif
+              </div>
+              % endif
           </div>
       % else:
           <div class="course-date">
               <img class="calendar-icon" width="14" src="${static.url('images/calendar.png')}" />
               <span class="localized_datetime" aria-hidden="true" data-format="shortDate" data-datetime="${course_date_string}" data-language="${LANGUAGE_CODE}" data-string="${_("Starts: {date}")}"></span>
+              % if _is_sponsored:
+              <div class="course-card-sponsor-footer">
+                <span class="course-card-badge">${_("KURS BEZPŁATNY")}</span>
+                % if _sponsor_logo:
+                <img class="course-card-sponsor-logo" src="${course_image_url(_full_course, 'sponsor_logo_image')}" alt="${_('Sponsor')}" />
+                % endif
+              </div>
+              % endif
           </div>
       % endif
+
     </div>
     <div class="sr">
       <ul>
