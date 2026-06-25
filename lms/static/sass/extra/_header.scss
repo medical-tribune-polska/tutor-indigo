@@ -13,19 +13,31 @@ header.global-header {
         display: flex;
         align-items: center;
         height: 50px;
+        position: relative;
 
         @include media-breakpoint-up(lg) {
             display: unset;
             height: auto;
+            position: static;
         }
+    }
+    .hamburger-menu {
+        order: -1;
     }
     .header-logo {
         margin: 0;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        @include media-breakpoint-up(lg) {
+            position: static;
+            transform: none;
+        }
         a {
-            margin: 10px 0 10px 25px;
+            margin: 10px 0;
             height: auto;
+            display: inline-block;
             @include media-breakpoint-up(lg) {
-                margin: 0;
                 margin: 20px 0 0;
             }
             .logo {
@@ -39,6 +51,11 @@ header.global-header {
     }
     .nav-links {
         width: 100%;
+        @include media-breakpoint-down(md) {
+            width: auto;
+            flex-shrink: 0;
+            margin-left: auto;
+        }
         .main {
             margin: 0 0 3px 38px;
             .nav-tab {
@@ -71,6 +88,14 @@ header.global-header {
                 line-height: 20px;
                 border-radius: 4px;
                 margin: 12px 0;
+                @include media-breakpoint-down(md) {
+                    box-shadow: none;
+                    padding: 0;
+                    background: transparent;
+                    margin: 0;
+                    display: flex;
+                    align-items: center;
+                }
                 &:after {
                     margin: 4px 0 0 4px;
                     border: 2px solid #15376D;
@@ -83,11 +108,25 @@ header.global-header {
                     width: 5px;
                     display: inline-block;
                     vertical-align: top;
+                    @include media-breakpoint-down(md) {
+                        display: none;
+                    }
+                }
+                .user-icon-mobile {
+                    display: none;
+                    @include media-breakpoint-down(md) {
+                        display: block;
+                        width: auto;
+                        height: auto;
+                    }
                 }
                 .username {
                     font: -webkit-control;
                     font-size: 16px;
                     font-weight: 700;
+                    @include media-breakpoint-down(md) {
+                        display: none;
+                    }
                 }
             }
             .dropdown-user-menu {
@@ -99,6 +138,10 @@ header.global-header {
                 box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.05), 0px 4px 6px -2px rgba(0, 0, 0, 0.05), 0px 10px 15px -3px rgba(0, 0, 0, 0.10);
                 border: none;
                 overflow: hidden;
+                @include media-breakpoint-down(md) {
+                    top: 40px;
+                    right: -5px;
+                }
                 .dropdown-item {
                     border: none !important;
                     &.hide-desktop {
