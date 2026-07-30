@@ -110,8 +110,11 @@
                     }
                     .course-info {
                         height: auto;
+                        min-height: 90px;
                         font-family: $font-family-title;
-                        padding: 10px 20px 0;
+                        padding: 10px 20px 12px;
+                        display: flex;
+                        flex-direction: column;
                         .course-code {
                             display: none;
                         }
@@ -163,31 +166,11 @@
                             font-weight: 700;
                             width: 138px;
                         }
-                        .course-date {
-                            border-bottom: 3px solid $course-listing-bottom-border;
-                            padding: 10px 20px;
-                            margin: 0 -20px;
-                            color: $course-listing-date-color;
-                            font-size: 12px;
-                            font-weight: 400;
-                            line-height: 20px;
-                            min-height: 60px;
-                            height: auto;
-                            svg {
-                                display: inline-block;
-                                margin: -4px 10px 0 0;
-                                vertical-align: middle;
-                            }
-                        }
-                        .calendar-icon {
-                            margin-right: 7px;
-                            margin-top: -3.5px;
-                        }
                         .course-card-sponsor-footer {
                             display: flex;
                             align-items: center;
                             justify-content: space-between;
-                            margin: 8px -20px 0;
+                            margin: auto -20px 0;
                             padding: 8px 20px 0;
                             .course-card-badge {
                                 display: inline-block;
