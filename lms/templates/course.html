@@ -34,37 +34,12 @@ from xmodule.modulestore.django import modulestore
         <span class="course-organization">${course.display_org_with_default}</span>
       </h2>
 
-      <%
-      if course.start is not None:
-          course_date_string = course.start.strftime('%Y-%m-%dT%H:%M:%S%z')
-      else:
-          course_date_string = ''
-      %>
-      % if course.advertised_start is not None:
-          <div class="course-date" aria-hidden="true">
-              <img class="calendar-icon" width="14" src="${static.url('images/calendar.png')}" />
-              ${_("Starts")}: ${course.advertised_start}
-              % if _is_sponsored:
-              <div class="course-card-sponsor-footer">
-                <span class="course-card-badge">${_("KURS BEZPŁATNY")}</span>
-                % if _sponsor_logo:
-                <img class="course-card-sponsor-logo" src="${course_image_url(_full_course, 'sponsor_logo_image')}" alt="${_('Sponsor')}" />
-                % endif
-              </div>
-              % endif
-          </div>
-      % else:
-          <div class="course-date">
-              <img class="calendar-icon" width="14" src="${static.url('images/calendar.png')}" />
-              <span class="localized_datetime" aria-hidden="true" data-format="shortDate" data-datetime="${course_date_string}" data-language="${LANGUAGE_CODE}" data-string="${_("Starts: {date}")}"></span>
-              % if _is_sponsored:
-              <div class="course-card-sponsor-footer">
-                <span class="course-card-badge">${_("KURS BEZPŁATNY")}</span>
-                % if _sponsor_logo:
-                <img class="course-card-sponsor-logo" src="${course_image_url(_full_course, 'sponsor_logo_image')}" alt="${_('Sponsor')}" />
-                % endif
-              </div>
-              % endif
+      % if _is_sponsored:
+          <div class="course-card-sponsor-footer">
+            <span class="course-card-badge">${_("KURS BEZPŁATNY")}</span>
+            % if _sponsor_logo:
+            <img class="course-card-sponsor-logo" src="${course_image_url(_full_course, 'sponsor_logo_image')}" alt="${_('Sponsor')}" />
+            % endif
           </div>
       % endif
 
@@ -73,11 +48,6 @@ from xmodule.modulestore.django import modulestore
       <ul>
         <li>${course.display_org_with_default}</li>
         <li>${course.display_number_with_default}</li>
-        % if course.advertised_start is not None:
-            <li>${_("Starts")}: <time itemprop="startDate">${course.advertised_start}</time></li>
-        % else:
-            <li>${_("Starts")}: <time class="localized_datetime" itemprop="startDate" data-format="shortDate" data-datetime="${course_date_string}" data-language="${LANGUAGE_CODE}"></time></li>
-        % endif
       </ul>
     </div>
   </a>
